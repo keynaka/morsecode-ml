@@ -7,5 +7,6 @@ import java.util.List;
  *
  */
 public interface TranslateService {
-	public List<String> translate(List<String> message);
+	public List<String> translate();
 }
+ 

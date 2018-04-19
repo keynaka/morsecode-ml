@@ -43,8 +43,8 @@ public class TranslatorController {
 		parser = new MorseParser(this.message);
 		List<String> result = parser.parse();
 		
-		translator = new MorseToRomanTranslator();
-		result = translator.translate(result);
+		translator = new MorseToRomanTranslator(result);
+		result = translator.translate();
 		
 		return result;
 	}
@@ -57,8 +57,8 @@ public class TranslatorController {
 		parser = new RomanParser(this.message);
 		List<String> result = parser.parse();
 		
-		translator = new RomanToMorseTranslator();
-		result = translator.translate(result);
+		translator = new RomanToMorseTranslator(result);
+		result = translator.translate();
 		
 		return result;
 	}

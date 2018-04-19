@@ -2,7 +2,6 @@ package ar.com.nnakasone.morsecode_ml.parseservice;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 
 import ar.com.nnakasone.morsecode_ml.dto.MessageRequest;
