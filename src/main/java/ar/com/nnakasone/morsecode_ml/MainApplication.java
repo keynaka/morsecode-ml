@@ -3,6 +3,7 @@ package ar.com.nnakasone.morsecode_ml;
 import java.util.Iterator;
 import java.util.List;
 
+import ar.com.nnakasone.morsecode_ml.controller.TranslatorController;
 import ar.com.nnakasone.morsecode_ml.dto.MessageRequest;
 import ar.com.nnakasone.morsecode_ml.parseservice.MorseParser;
 import ar.com.nnakasone.morsecode_ml.parseservice.ParseService;
@@ -19,7 +20,7 @@ public class MainApplication {
 	public static void main(String[] args) {
 		//MessageRequest mr = new MessageRequest("HOLA MELI");
 		//MessageRequest mr = new MessageRequest(".... --- .-.. .-  -- . .-.. ..");
-		MessageRequest mr = new MessageRequest("-. --- .  - .  .- -- ---");
+/*		MessageRequest mr = new MessageRequest("-. --- .  - .  .- -- ---");
 		
 		ParseService mp = new MorseParser(mr);
 		List<String> p = mp.parse();
@@ -34,7 +35,13 @@ public class MainApplication {
 		ts = new RomanToMorseTranslator();
 		p = ts.translate(p);
 		
-		show(p);
+		show(p);*/
+		
+		MessageRequest mr = new MessageRequest(".... --- .-.. .-  -- . .-.. ..");
+		TranslatorController tc = new TranslatorController(mr);
+		List<String> result = tc.translate2Human();
+		
+		show(result);
 	}
 	
 	
