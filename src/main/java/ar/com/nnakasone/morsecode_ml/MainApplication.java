@@ -20,9 +20,9 @@ public class MainApplication {
 	public static void main(String[] args) {
 		//MessageRequest mr = new MessageRequest("HOLA MELI");
 		//MessageRequest mr = new MessageRequest(".... --- .-.. .-  -- . .-.. ..");
-/*		MessageRequest mr = new MessageRequest("-. --- .  - .  .- -- ---");
+/*		MessageRequest mr3 = new MessageRequest("-. --- .  - .  .- -- ---");
 		
-		ParseService mp = new MorseParser(mr);
+		ParseService mp = new MorseParser(mr3);
 		List<String> p = mp.parse();
 		
 		show(p);
@@ -42,6 +42,13 @@ public class MainApplication {
 		List<String> result = tc.translate2Human();
 		
 		show(result);
+		
+		MessageRequest mr2 = new MessageRequest("HOLA MELI");
+		tc.setMessage(mr2);
+		result = tc.translate2Morse();
+		
+		show(result);
+		
 	}
 	
 	

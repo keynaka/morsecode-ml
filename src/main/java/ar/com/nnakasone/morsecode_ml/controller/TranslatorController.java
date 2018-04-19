@@ -54,6 +54,16 @@ public class TranslatorController {
 	 * @return
 	 */
 	public List<String> translate2Morse() {
-		return null;
+		parser = new RomanParser(this.message);
+		List<String> result = parser.parse();
+		
+		translator = new RomanToMorseTranslator();
+		result = translator.translate(result);
+		
+		return result;
+	}
+
+	public void setMessage(MessageRequest mr) {
+		this.message = mr;
 	}
 }
