@@ -1,5 +1,6 @@
 package ar.com.nnakasone.morsecode_ml.translateservice;
 
+import java.util.List;
 import java.util.Map;
 
 
@@ -12,8 +13,8 @@ public class MorseToRomanTranslator extends RomanMorseTranslator{
 	/**
 	 * Constructor vacio del servicio
 	 */
-	public MorseToRomanTranslator() {
-		super();
+	public MorseToRomanTranslator(List<String> parsedMessage) {
+		super(parsedMessage);
 	}
 	
 	/**

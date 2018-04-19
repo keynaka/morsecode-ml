@@ -21,24 +21,27 @@ public abstract class RomanMorseTranslator implements TranslateService {
 	protected Code roman;
 	
 	protected Code morse;
+	
+	protected List<String> parsedMessage;
 
 	/**
 	 * Constructor de Clase RomanMorseTranslator
 	 */
-	public RomanMorseTranslator() {
+	public RomanMorseTranslator(List<String> parsedMessage) {
 		roman = new Roman();
 		morse = new Morse();
 		map = new HashMap<String,String>();
 		this.iniciateMap(map);
+		this.parsedMessage = parsedMessage;
 	}
 	
 	/**
 	 * Traduce mensaje de un codigo a otro
 	 * @param parsedMessage
 	 */
-	public List<String> translate(List<String> parsedMessage) {
+	public List<String> translate() {
 		List<String> translatedMessage = new ArrayList<String>();
-		Iterator<String> it = parsedMessage.iterator();
+		Iterator<String> it = this.parsedMessage.iterator();
 		while(it.hasNext()) {
 			translatedMessage.add(map.get(it.next()));
 		}
