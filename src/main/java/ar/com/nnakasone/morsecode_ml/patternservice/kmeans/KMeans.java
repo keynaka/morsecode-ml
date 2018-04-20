@@ -8,39 +8,60 @@ import java.util.*;
  */
 public class KMeans {
 
-	private List<Element> dotDashElements;
+	private List<Element> elements;
 	
-	private List<Element> spaceElements;
+	private List<Cluster> clusters;
 	
-	private Cluster dotCluster;
+	private final static String DOT = "DOT";
 	
-	private Cluster dashCluster;
+	private final static String DASH = "DASH";
 	
-	private Cluster innerSpaceCluster;
+	private final static String INNER_SPACE = "INNER_SPACE";
 	
-	private Cluster outerSpaceCluster;
-	
+	private final static String OUTER_SPACE = "OUTER_SPACE";
+			
 	/**
 	 * 
 	 */
 	public KMeans(List<String> parsedMessage) {
-		chargeElements(parsedMessage);
-		initializeClusters();
+		initialize(parsedMessage);
+		clasify();
 	}
 
-	private void initializeClusters() {
-		Comparator<Element> c = (x, y) -> Integer.compare(x.getPosition(), y.getPosition());
+	private void clasify() {
+		Iterator<Element> it = elements.iterator();
 		
-		dotCluster = new Cluster(dotDashElements.stream().min(c).get(),'1');
-		dashCluster = new Cluster(dotDashElements.stream().max(c).get(),'1');
-		
-		innerSpaceCluster = new Cluster(spaceElements.stream().min(c).get(),'0');
-		outerSpaceCluster = new Cluster(spaceElements.stream().max(c).get(),'0');
+		while (it.hasNext()) {
+			Element element = it.next();
+			nearestCluster(element).add(element);
+		}
 	}
 
-	private void chargeElements(List<String> parsedMessage) {
-		dotDashElements = new ArrayList<Element>();
-		spaceElements = new ArrayList<Element>();
+	private Cluster nearestCluster(Element element) {		
+		Iterator<Cluster> it = clusters.iterator();
+		
+		Cluster minDistanceCluster = null;
+
+		while(it.hasNext()) {
+			Cluster cl = it.next();
+			
+			if (cl.isSameTypeWith(element)) {
+				if (minDistanceCluster == null) {
+					minDistanceCluster = cl;
+				} else {
+					if (minDistanceCluster.calculateDistanceToCentroid(element) >= cl.calculateDistanceToCentroid(element)) {
+						minDistanceCluster = cl;
+					}
+				}
+			}
+		}
+		return minDistanceCluster;
+	}
+
+	private void initialize(List<String> parsedMessage) {
+		List<Element> dotDashElements = new ArrayList<Element>();
+		List<Element> spaceElements = new ArrayList<Element>();
+		elements = new ArrayList<Element>();
 		
 		Iterator<String> it = parsedMessage.iterator();
 		while (it.hasNext()) {
@@ -50,42 +71,28 @@ public class KMeans {
 			} else {
 				spaceElements.add(new Element(element));
 			}
+			elements.add(new Element(element));
+		}
+		initializeClusters(dotDashElements, spaceElements);
+	}
+	
+	private void initializeClusters(List<Element> dotDashElements, List<Element> spaceElements) {
+		clusters = new ArrayList<Cluster>();
+		
+		Comparator<Element> c = (x, y) -> Float.compare(x.getPosition(), y.getPosition());
+		
+		clusters.add(new Cluster(dotDashElements.stream().min(c).get(), DOT));
+		clusters.add(new Cluster(dotDashElements.stream().max(c).get(), DASH));
+		
+		clusters.add(new Cluster(spaceElements.stream().min(c).get(),INNER_SPACE));
+		clusters.add(new Cluster(spaceElements.stream().max(c).get(), OUTER_SPACE));
+	}
+	
+	public void showClusters() {
+		Iterator<Cluster> it = clusters.iterator();
+		while (it.hasNext()) {
+			System.out.println(it.next());
 		}
 	}
 
-	public Cluster getDotCluster() {
-		return dotCluster;
-	}
-
-	public void setDotCluster(Cluster dotCluster) {
-		this.dotCluster = dotCluster;
-	}
-
-	public Cluster getDashCluster() {
-		return dashCluster;
-	}
-
-	public void setDashCluster(Cluster dashCluster) {
-		this.dashCluster = dashCluster;
-	}
-
-	public Cluster getInnerSpaceCluster() {
-		return innerSpaceCluster;
-	}
-
-	public void setInnerSpaceCluster(Cluster innerSpaceCluster) {
-		this.innerSpaceCluster = innerSpaceCluster;
-	}
-
-	public Cluster getOuterSpaceCluster() {
-		return outerSpaceCluster;
-	}
-
-	public void setOuterSpaceCluster(Cluster outerSpaceCluster) {
-		this.outerSpaceCluster = outerSpaceCluster;
-	}
-	
-	
-
-		
 }

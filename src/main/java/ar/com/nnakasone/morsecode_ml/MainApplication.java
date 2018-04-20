@@ -27,18 +27,14 @@ public class MainApplication {
 		
 		show(result);*/
 		
-		MessageRequest mr = new MessageRequest("000000001000000001111011100000000011100000");
+		MessageRequest mr = new MessageRequest("0000000011011100111111000111110000110000011100000011100000");
 		BinaryParser bp = new BinaryParser(mr);
 		List<String> parsedMessage = bp.parse();
 		
 		show(parsedMessage);
 		
 		KMeans km = new KMeans(parsedMessage);
-		
-		System.out.println(km.getDotCluster());
-		System.out.println(km.getDashCluster());
-		System.out.println(km.getInnerSpaceCluster());
-		System.out.println(km.getOuterSpaceCluster());
+		km.showClusters();
 	}
 
 		

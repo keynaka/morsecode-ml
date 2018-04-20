@@ -6,8 +6,8 @@ package ar.com.nnakasone.morsecode_ml.patternservice.kmeans;
  */
 public class Element {
 
-	private int position;
-	private char type;
+	private Float position;
+	private String type;
 	private String value;
 
 	/**
@@ -20,20 +20,20 @@ public class Element {
 		
 	}
 	
-	public int getPosition() {
+	public Float getPosition() {
 		return position;
 	}
 	
 	public void setPosition(String value) {
-		this.position = value.length();
+		this.position = (float) value.length();
 	}
 	
-	public char getType() {
+	public String getType() {
 		return type;
 	}
 
 	public void setType(String value) {
-		this.type = value.charAt(0);
+		this.type = Character.toString(value.charAt(0));
 	}
 	
 	public String getValue() {
@@ -44,15 +44,15 @@ public class Element {
 		this.value = value;
 	}
 
-	public int distance(Element e) {
+	public float distance(Element e) {
 		return Math.abs(this.position - e.getPosition());
 	}
 	
-	public int distance(int centroid) {
+	public float distance(int centroid) {
 		return Math.abs(this.position - centroid);
 	}
 
-	public void setPosition(int i) {
+	public void setPosition(float i) {
 		this.position = i;
 	}
 }
