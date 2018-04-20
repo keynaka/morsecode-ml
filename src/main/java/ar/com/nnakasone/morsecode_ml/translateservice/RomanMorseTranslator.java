@@ -1,6 +1,5 @@
 package ar.com.nnakasone.morsecode_ml.translateservice;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -39,11 +38,11 @@ public abstract class RomanMorseTranslator implements TranslateService {
 	 * Traduce mensaje de un codigo a otro
 	 * @param parsedMessage
 	 */
-	public List<String> translate() {
-		List<String> translatedMessage = new ArrayList<String>();
+	public String translate() {
+		String translatedMessage = "";
 		Iterator<String> it = this.parsedMessage.iterator();
 		while(it.hasNext()) {
-			translatedMessage.add(map.get(it.next()));
+			translatedMessage = translatedMessage.concat(map.get(it.next()));
 		}
 		return translatedMessage;
 	}

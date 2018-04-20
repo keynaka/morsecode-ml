@@ -10,7 +10,7 @@ import java.util.Map;
 public class RomanToMorseTranslator extends RomanMorseTranslator {
 
 	/**
-	 * Constructor vacio del servicio
+	 * Constructor
 	 */
 	public RomanToMorseTranslator(List<String> parsedMessage) {
 		super(parsedMessage);

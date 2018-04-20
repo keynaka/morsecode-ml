@@ -25,45 +25,47 @@ public class TranslatorController {
 	public TranslatorController(MessageRequest message) {
 		this.message = message;
 	}
+	
+	public void setMessage(MessageRequest mr) {
+		this.message = mr;
+	}
 
 	/**
 	 * Traduce un mensaje en binario a morse
 	 * @return value
 	 */
-	public List<String> decodeBits2Morse() {
-		//TODO: COMPLETAR
-		return null;
+	public String decodeBits2Morse() {
+		parser = new BinaryParser(this.message);
+		List<String> result = parser.parse();
+		
+		translator = new BinaryToMorseTranslator(result);
+		
+		return translator.translate();
 	}
 	
 	/**
 	 * Traduce un mensaje en morse a romano
 	 * @return value
 	 */
-	public List<String> translate2Human() {
+	public String translate2Human() {
 		parser = new MorseParser(this.message);
 		List<String> result = parser.parse();
 		
 		translator = new MorseToRomanTranslator(result);
-		result = translator.translate();
 		
-		return result;
+		return translator.translate();
 	}
 	
 	/**
 	 * Traduce un mensaje en romano a morse
 	 * @return
 	 */
-	public List<String> translate2Morse() {
+	public String translate2Morse() {
 		parser = new RomanParser(this.message);
 		List<String> result = parser.parse();
 		
 		translator = new RomanToMorseTranslator(result);
-		result = translator.translate();
-		
-		return result;
-	}
 
-	public void setMessage(MessageRequest mr) {
-		this.message = mr;
+		return translator.translate();
 	}
 }

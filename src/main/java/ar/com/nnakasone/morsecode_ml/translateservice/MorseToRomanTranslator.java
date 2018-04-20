@@ -11,7 +11,7 @@ import java.util.Map;
 public class MorseToRomanTranslator extends RomanMorseTranslator{
 	
 	/**
-	 * Constructor vacio del servicio
+	 * Constructor
 	 */
 	public MorseToRomanTranslator(List<String> parsedMessage) {
 		super(parsedMessage);
