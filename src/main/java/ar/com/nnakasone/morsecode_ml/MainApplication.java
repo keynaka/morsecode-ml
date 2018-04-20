@@ -5,6 +5,7 @@ import java.util.List;
 
 import ar.com.nnakasone.morsecode_ml.controller.TranslatorController;
 import ar.com.nnakasone.morsecode_ml.dto.MessageRequest;
+import ar.com.nnakasone.morsecode_ml.parseservice.BinaryParser;
 
 /**
  * @author Nicolas Nakasone
@@ -13,7 +14,7 @@ import ar.com.nnakasone.morsecode_ml.dto.MessageRequest;
 public class MainApplication {
 
 	public static void main(String[] args) {
-		MessageRequest mr = new MessageRequest(".... --- .-.. .-  -- . .-.. ..");
+/*		MessageRequest mr = new MessageRequest(".... --- .-.. .-  -- . .-.. ..");
 		TranslatorController tc = new TranslatorController(mr);
 		List<String> result = tc.translate2Human();
 		
@@ -23,8 +24,15 @@ public class MainApplication {
 		tc.setMessage(mr);
 		result = tc.translate2Morse();
 		
-		show(result);
+		show(result);*/
+		
+		MessageRequest mr = new MessageRequest("0000000011110000000011110000011100000000011100000");
+		BinaryParser bp = new BinaryParser(mr);
+		show(bp.parse());
+		System.out.println(bp.getMessage());
 	}
+
+		
 	
 	
 	/**
