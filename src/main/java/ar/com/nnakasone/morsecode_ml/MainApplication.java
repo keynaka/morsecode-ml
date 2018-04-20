@@ -6,6 +6,7 @@ import java.util.List;
 import ar.com.nnakasone.morsecode_ml.controller.TranslatorController;
 import ar.com.nnakasone.morsecode_ml.dto.MessageRequest;
 import ar.com.nnakasone.morsecode_ml.parseservice.BinaryParser;
+import ar.com.nnakasone.morsecode_ml.patternservice.kmeans.KMeans;
 
 /**
  * @author Nicolas Nakasone
@@ -26,10 +27,14 @@ public class MainApplication {
 		
 		show(result);*/
 		
-		MessageRequest mr = new MessageRequest("0000000011110000000011110000011100000000011100000");
+		MessageRequest mr = new MessageRequest("0000000011011100111111000111110000110000011100000011100000");
 		BinaryParser bp = new BinaryParser(mr);
-		show(bp.parse());
-		System.out.println(bp.getMessage());
+		List<String> parsedMessage = bp.parse();
+		
+		show(parsedMessage);
+		
+		KMeans km = new KMeans(parsedMessage);
+		km.showClusters();
 	}
 
 		

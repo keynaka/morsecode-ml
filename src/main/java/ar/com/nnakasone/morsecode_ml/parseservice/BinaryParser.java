@@ -30,7 +30,7 @@ public class BinaryParser implements ParseService {
 		List<String> parsedMessage = new ArrayList<String>();
 		String msg = messageRequest.getValue();
 		
-		int i = 1;
+		int i = 0;
 		char actualValue = msg.charAt(i);
 		
 		while (!msg.isEmpty() && i < msg.length()) {
@@ -38,7 +38,7 @@ public class BinaryParser implements ParseService {
 				parsedMessage.add(msg.substring(0, i));
 				actualValue = msg.charAt(i);
 				msg = msg.substring(i);
-				i = 1;
+				i = 0;
 			}
 			i++;
 		}
@@ -47,11 +47,15 @@ public class BinaryParser implements ParseService {
 		return parsedMessage;
 	}	
 
+	public MessageRequest getMessageRequest() {
+		return messageRequest;
+	}
+
+	public void setMessageRequest(MessageRequest messageRequest) {
+		this.messageRequest = messageRequest;
+	}
+
 	private void cleanMessage() {
 		this.messageRequest.setValue(this.messageRequest.getValue().replace("0", " ").trim().replace(" ", "0"));
-	}
-	
-	public String getMessage() {
-		return this.messageRequest.getValue();
 	}
 }
