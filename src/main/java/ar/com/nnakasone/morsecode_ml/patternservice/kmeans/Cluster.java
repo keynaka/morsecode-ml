@@ -9,9 +9,10 @@ import java.util.*;
 public class Cluster {
 
 	private Element centroid;
-	private List<Element> elements;
-	private String type;
 	
+	private List<Element> elements;
+	
+	private String type;
 	
 	private final static String DOT = "DOT";
 	
@@ -86,5 +87,15 @@ public class Cluster {
 			
 		return (element.getType().equals(map.get(this.type)));
 		
+	}
+
+	public boolean contains(String value) {
+		Iterator<Element> it = elements.iterator();
+		while (it.hasNext()) {
+			if (it.next().getValue().equals(value)) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

@@ -1,23 +1,21 @@
 package ar.com.nnakasone.morsecode_ml.entities;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 /**
  * @author Nicolas Nakasone
  *
  */
-public class Morse extends Code {
+public class Morse implements Code {
 
-	private static final String[] morseCode = {".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--",
+	private final String[] morseCode = {".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--",
 			"-.","---",".--","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--..",
 			"-----",".----","..---","...--","....-",".....","-....","--...","---..","----."," "};
-	
-	/**
-	 * Constructor de Clase Morse
-	 */
-	public Morse() {
-		code = new ArrayList<String>(Arrays.asList(morseCode));
+
+	public String getCode(int i) {
+		return morseCode[i];
+	}
+
+	public int getSize() {
+		return morseCode.length;
 	}
 
 }
