@@ -24,6 +24,10 @@ public class BinaryToMorseTranslator implements TranslateService {
 		this.parsedMessage = parsedMessage;
 	}
 
+	/**
+	 * Traduce un mensaje binario parseado a morse
+	 * @return result
+	 */
 	@Override
 	public String translate() {
 		List<String> translatedMessage = new ArrayList<String>();
@@ -52,6 +56,11 @@ public class BinaryToMorseTranslator implements TranslateService {
 		return result; 
 	}
 
+	/**
+	 * Convierte un mensaje expresado en una lista en un string
+	 * @param translatedMessage
+	 * @return
+	 */
 	private String convertToString(List<String> translatedMessage) {
 		Iterator<String> it = translatedMessage.iterator();
 		String response = "";
@@ -61,6 +70,11 @@ public class BinaryToMorseTranslator implements TranslateService {
 		return response;
 	}
 
+	/**
+	 * Devuelve si el mensaje es un codigo morse existente
+	 * @param translatedMessage
+	 * @return
+	 */
 	private boolean isValidMorseCode(List<String> translatedMessage) {
 		Code morse = new Morse();
 		boolean response = true;

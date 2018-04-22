@@ -32,7 +32,7 @@ public class MorseToRomanTranslator extends RomanMorseTranslator{
 	}		
 	
 	/**
-	 * Traduce mensaje de un codigo a otro
+	 * Traduce mensaje de morse a romano
 	 * @param parsedMessage
 	 */
 	public String translate() {
