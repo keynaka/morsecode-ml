@@ -36,5 +36,4 @@ public abstract class RomanMorseTranslator implements TranslateService {
 	public abstract String translate();
 	
 	public abstract void iniciateMap(Map<String,String> map);
-
 }

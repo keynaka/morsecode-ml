@@ -93,5 +93,4 @@ public class BinaryToMorseTranslator implements TranslateService {
 		
 		return response;
 	}
-
 }

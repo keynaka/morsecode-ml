@@ -54,6 +54,11 @@ public class Morse implements Code {
 		return found;
 	}
 
+	/**
+	 * Devuelve el valor que se encontraba con el nombre del caracter morse a su valor real
+	 * @param value
+	 * @return
+	 */
 	public String getMorse(String value) {
 		return this.morseNameValueRelation.get(value);
 	}
