@@ -18,4 +18,15 @@ public class Morse implements Code {
 		return morseCode.length;
 	}
 
+	@Override
+	public boolean exists(String value) {
+		int i = 0;
+		boolean found = false;
+		while (i<morseCode.length && !found) {
+			found = (morseCode[i].equals(value));
+			i++;
+		}
+		return found;
+	}
+
 }

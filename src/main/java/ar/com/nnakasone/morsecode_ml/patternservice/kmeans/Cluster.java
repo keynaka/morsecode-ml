@@ -10,7 +10,7 @@ public class Cluster {
 
 	private Element centroid;
 	
-	private List<Element> elements;
+	private Set<Element> elements;
 	
 	private String type;
 	
@@ -23,16 +23,16 @@ public class Cluster {
 	private final static String OUTER_SPACE = "OUTER_SPACE";
 	
 	/**
-	 * 
+	 * Constructor de Clase Cluster
 	 */
 	public Cluster(Element centroid, String type) {
 		this.centroid = centroid;
 		this.type = type;
-		this.elements = new ArrayList<Element>();
+		this.elements = new HashSet<Element>();
 	}
 	
 	public Cluster() {
-		this.elements = new ArrayList<Element>();
+		this.elements = new HashSet<Element>();
 	}
 
 	public String getType() {
@@ -48,14 +48,21 @@ public class Cluster {
 		recalculateCentroid();
 	}
 	
+	public void delete(Element selectedElement) {
+		this.elements.remove(selectedElement);
+		recalculateCentroid();
+	}
+	
 	public void recalculateCentroid() {
 		float result = centroid.getPosition();
-		
-		Iterator<Element> it = elements.iterator();
 		int j = 1;
-		while(it.hasNext()) {
-			result += it.next().getPosition();
-			j++;
+		
+		if (!this.elements.isEmpty()) {
+			Iterator<Element> it = elements.iterator();
+			while(it.hasNext()) {
+				result += it.next().getPosition();
+				j++;
+			}
 		}
 		this.centroid.setPosition(result/j);
 	}
@@ -97,5 +104,51 @@ public class Cluster {
 			}
 		}
 		return false;
+	}
+	
+	public boolean isEmpty() {
+		return elements.isEmpty();
+	}
+	
+	/**
+	 * Devuelve el minimo elemento, siempre que el cluster no este vacio.
+	 * Si esta vacio devolvera null.
+	 * 
+	 * @
+	 * @return minElement
+	 */
+	public Element getMinElement() {
+		if (elements.isEmpty())
+			return null;
+		Iterator<Element> it = elements.iterator();
+		Element minElement = it.next();
+		while(it.hasNext()) {
+			Element actualElement = it.next();
+			if (minElement.getPosition() > actualElement.getPosition()) {
+				minElement = actualElement;
+			}
+		}
+		return minElement;
+	}
+	
+	/**
+	 * Devuelve el maximo elemento, siempre que el cluster no este vacio.
+	 * Si esta vacio devolvera null.
+	 * 
+	 * @
+	 * @return minElement
+	 */
+	public Element getMaxElement() {
+		if (elements.isEmpty())
+			return null;
+		Iterator<Element> it = elements.iterator();
+		Element maxElement = it.next();
+		while(it.hasNext()) {
+			Element actualElement = it.next();
+			if (maxElement.getPosition() < actualElement.getPosition()) {
+				maxElement = actualElement;
+			}
+		}
+		return maxElement;
 	}
 }

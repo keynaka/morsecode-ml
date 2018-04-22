@@ -22,4 +22,14 @@ public class Roman implements Code {
 	public int getSize() {
 		return this.roman.length;
 	}
+	
+	@Override
+	public boolean exists(String value) {
+		int i = 0;
+		boolean found = false;
+		while (i<roman.length && !found) {
+			found = (roman[i].equals(value));
+		}
+		return found;
+	}
 }

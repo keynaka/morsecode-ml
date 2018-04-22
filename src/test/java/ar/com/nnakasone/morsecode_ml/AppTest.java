@@ -61,7 +61,7 @@ public class AppTest {
 		Assert.assertEquals("0123456789", this.translatorController.translate2Human());
 	}
 	
-	/* -----------------------Test de Metodo: translate2Morse()------------------------------ */
+	/* -----------------------Test de Metodo: translate2Morse()------------------------------ */ 
 	
 	@Test
 	public void testHolaMeliHumanCodeShouldGiveAHolaMeliMorseCode() {
@@ -103,7 +103,7 @@ public class AppTest {
 		Assert.assertEquals("----- .---- ..--- ...-- ....- ..... -.... --... ---.. ----.", this.translatorController.translate2Morse());
 	}
 	
-	/* -----------------------Test de Metodo: deco()------------------------------ */
+	/* -----------------------Test de Metodo: decodeBits2Morse()------------------------------ */ 
 	
 	@Test
 	public void testHolaBinaryCodeShouldGiveAHolaMorseCode() {
@@ -111,5 +111,34 @@ public class AppTest {
 		translatorController.setMessage(messageRequest);
 		
 		Assert.assertEquals(".... --- .-.. .-", this.translatorController.decodeBits2Morse());
+	}
+	
+	@Test
+	public void testXInBinaryCodeWithoutNoiseShouldGiveXiInMorseCode() {
+		messageRequest.setValue("1111111111010101111111");
+		translatorController.setMessage(messageRequest);
+		
+		Assert.assertEquals("-..-", this.translatorController.decodeBits2Morse());
+	}
+	
+	@Test
+	public void testNoMatterHowManyNoiseHasAnXInBinaryCodeItShouldGiveAnXInMorseCode() {
+		messageRequest.setValue("00000000000000000000000000000000000000000000000000000000000000000111111111111010101111111111000000000000000000000000000000000000000000000");
+		translatorController.setMessage(messageRequest);
+		
+		Assert.assertEquals("-..-", this.translatorController.decodeBits2Morse());
+	}
+	
+	
+	/**
+	 * En este test los 2 ceros consecutivos ("00") son mas interpretables como una separacion entre . y -, que una separacion entre caracteres morse. 
+	 * Sin embargo deberia dar una respuesta apropiada buscando otra alternativa. 
+	 */
+	@Test
+	public void testMisinterpretableElementShouldGiveApropiateAnswer() {
+		messageRequest.setValue("101010101001000001");
+		translatorController.setMessage(messageRequest);
+		
+		Assert.assertEquals("..... . .", this.translatorController.decodeBits2Morse());
 	}
 }
