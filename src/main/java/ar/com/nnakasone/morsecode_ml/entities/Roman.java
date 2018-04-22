@@ -29,6 +29,7 @@ public class Roman implements Code {
 		boolean found = false;
 		while (i<roman.length && !found) {
 			found = (roman[i].equals(value));
+			i++;
 		}
 		return found;
 	}

@@ -11,6 +11,8 @@ import java.util.Map;
  */
 public class MorseToRomanTranslator extends RomanMorseTranslator{
 	
+	private final String EMPTY_ANSWER = "";
+
 	/**
 	 * Constructor
 	 */
@@ -37,7 +39,12 @@ public class MorseToRomanTranslator extends RomanMorseTranslator{
 		String translatedMessage = "";
 		Iterator<String> it = this.parsedMessage.iterator();
 		while(it.hasNext()) {
-			translatedMessage = translatedMessage.concat(map.get(it.next()));
+			String value = it.next();
+			if (morse.exists(value)) {
+				translatedMessage = translatedMessage.concat(map.get(value));				
+			} else {
+				return EMPTY_ANSWER;
+			}
 		}
 		return translatedMessage;
 	}

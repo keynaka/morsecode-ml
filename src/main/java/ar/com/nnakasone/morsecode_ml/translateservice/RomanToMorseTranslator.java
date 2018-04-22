@@ -12,6 +12,8 @@ public class RomanToMorseTranslator extends RomanMorseTranslator {
 
 	private final String OTHER_LETTER_SEPARATOR = " ";
 	
+	private final String EMPTY_ANSWER = "";
+	
 	/**
 	 * Constructor
 	 */
@@ -38,10 +40,14 @@ public class RomanToMorseTranslator extends RomanMorseTranslator {
 		String translatedMessage = "";
 		Iterator<String> it = this.parsedMessage.iterator();
 		while(it.hasNext()) {
-			String value = it.next();
-			translatedMessage = translatedMessage.concat(map.get(value));
-			if (!value.equals(" "))
-				translatedMessage = translatedMessage.concat(OTHER_LETTER_SEPARATOR);
+			String value = it.next().toUpperCase();
+			if (roman.exists(value)) {
+				translatedMessage = translatedMessage.concat(map.get(value));
+				if (!value.equals(" "))
+					translatedMessage = translatedMessage.concat(OTHER_LETTER_SEPARATOR);
+			} else {
+				return EMPTY_ANSWER;
+			}
 		}
 		
 		return translatedMessage.substring(0, translatedMessage.length()-1);
