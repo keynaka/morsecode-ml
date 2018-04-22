@@ -34,18 +34,7 @@ public abstract class RomanMorseTranslator implements TranslateService {
 		this.parsedMessage = parsedMessage;
 	}
 	
-	/**
-	 * Traduce mensaje de un codigo a otro
-	 * @param parsedMessage
-	 */
-	public String translate() {
-		String translatedMessage = "";
-		Iterator<String> it = this.parsedMessage.iterator();
-		while(it.hasNext()) {
-			translatedMessage = translatedMessage.concat(map.get(it.next()));
-		}
-		return translatedMessage;
-	}
+	public abstract String translate();
 	
 	public abstract void iniciateMap(Map<String,String> map);
 
