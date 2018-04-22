@@ -1,6 +1,6 @@
 package ar.com.nnakasone.morsecode_ml.patternservice.kmeans;
 
-import ar.com.nnakasone.morsecode_ml.entities.Binary;
+import ar.com.nnakasone.morsecode_ml.entities.Morse;
 
 /**
  * @author Nicolas Nakasone
@@ -14,8 +14,8 @@ public class InnerToOuterSpace extends ChangeStrategy {
 	 */
 	public InnerToOuterSpace(KMeans kmeans) {
 		super(kmeans);
-		giver = kmeans.getClusters().get(Binary.INNER_SPACE);
-		receiver = kmeans.getClusters().get(Binary.OUTER_SPACE);
+		giver = kmeans.getClusters().get(Morse.INNER_SPACE);
+		receiver = kmeans.getClusters().get(Morse.OUTER_SPACE);
 		selectedElement = giver.getMaxElement();
 	}
 }

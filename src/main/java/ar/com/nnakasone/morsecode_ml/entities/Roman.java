@@ -23,6 +23,10 @@ public class Roman implements Code {
 		return this.roman.length;
 	}
 	
+	/**
+	 * Devuelve si existe el valor ingresado dentro de los posibles en el codigo Romano.
+	 * @return found
+	 */
 	@Override
 	public boolean exists(String value) {
 		int i = 0;

@@ -2,7 +2,7 @@ package ar.com.nnakasone.morsecode_ml.patternservice.kmeans;
 
 import java.util.*;
 
-import ar.com.nnakasone.morsecode_ml.entities.Binary;
+import ar.com.nnakasone.morsecode_ml.entities.Morse;
 import ar.com.nnakasone.morsecode_ml.patternservice.PatternAnalyzerService;
 
 /**
@@ -15,9 +15,9 @@ public class KMeans implements PatternAnalyzerService{
 	
 	private Map<String, Cluster> clusters;
 	
-	private Map<String, String> clusterToMorse;
-	
 	private Queue<ChangeStrategy> options;
+	
+	private Map<String,String> clusterToMorse;
 	
 	/**
 	 * Construsctor de KMeans
@@ -28,6 +28,10 @@ public class KMeans implements PatternAnalyzerService{
 		createOptions();
 	}
 
+	/**
+	 * Inicializa los elementos necesarios para la corrida del KMeans
+	 * @param parsedMessage
+	 */
 	private void initialize(List<String> parsedMessage) {
 		List<Element> dotDashElements = new ArrayList<Element>();
 		List<Element> spaceElements = new ArrayList<Element>();
@@ -44,30 +48,28 @@ public class KMeans implements PatternAnalyzerService{
 			elements.add(new Element(element));
 		}
 		initializeClusters(dotDashElements, spaceElements);
-		initializeClusterToMorseMap();
 	}
 	
+	/**
+	 * Inicializa cada uno de los 4 clusters
+	 * @param dotDashElements
+	 * @param spaceElements
+	 */
 	private void initializeClusters(List<Element> dotDashElements, List<Element> spaceElements) {
 		clusters = new HashMap<String, Cluster>();
 		
 		Comparator<Element> c = (x, y) -> Float.compare(x.getPosition(), y.getPosition());
 		
-		clusters.put(Binary.DOT, new Cluster(dotDashElements.stream().min(c).get(), Binary.DOT));
-		clusters.put(Binary.DASH, new Cluster(dotDashElements.stream().max(c).get(), Binary.DASH));
+		clusters.put(Morse.DOT, new Cluster(dotDashElements.stream().min(c).get(), Morse.DOT));
+		clusters.put(Morse.DASH, new Cluster(dotDashElements.stream().max(c).get(), Morse.DASH));
 		
-		clusters.put(Binary.INNER_SPACE, new Cluster(spaceElements.stream().min(c).get(),Binary.INNER_SPACE));
-		clusters.put(Binary.OUTER_SPACE, new Cluster(spaceElements.stream().max(c).get(), Binary.OUTER_SPACE));
+		clusters.put(Morse.INNER_SPACE, new Cluster(spaceElements.stream().min(c).get(),Morse.INNER_SPACE));
+		clusters.put(Morse.OUTER_SPACE, new Cluster(spaceElements.stream().max(c).get(), Morse.OUTER_SPACE));
 	}
 	
-	private void initializeClusterToMorseMap() {
-		clusterToMorse = new HashMap<String,String>();
-		
-		clusterToMorse.put(Binary.DOT, ".");
-		clusterToMorse.put(Binary.DASH, "-");
-		clusterToMorse.put(Binary.INNER_SPACE, "");
-		clusterToMorse.put(Binary.OUTER_SPACE, " ");		
-	}
-	
+	/**
+	 * Clasifica cada uno de los elementos al cluster mas cercano
+	 */
 	private void clasify() {
 		Iterator<Element> it = elements.iterator();
 		
@@ -77,6 +79,11 @@ public class KMeans implements PatternAnalyzerService{
 		}
 	}
 
+	/**
+	 * Devuelve el cluster el cual sea del mismo tipo y la distancia de su posicion al centroide del cluster sea la mas cercana
+	 * @param element
+	 * @return
+	 */
 	private Cluster nearestCluster(Element element) {		
 		Iterator<Map.Entry<String,Cluster>> it = clusters.entrySet().iterator();
 		
@@ -98,6 +105,9 @@ public class KMeans implements PatternAnalyzerService{
 		return minDistanceCluster;
 	}
 	
+	/**
+	 * Carga los posibles tipos de estrategias para cambios que se puedan implementar para reajustar los clusters
+	 */
 	private void createOptions() {
 		options = new LinkedList<ChangeStrategy>();
 		options.add(new DotToDash(this));
@@ -105,8 +115,13 @@ public class KMeans implements PatternAnalyzerService{
 		options.add(new InnerToOuterSpace(this));
 		options.add(new OuterToInnerSpace(this));
 	}
+	
+	/**
+	 * Devuelve el valor de un elemento en binario en morse
+	 */
 	@Override
 	public String determineValue(String value) {
+		Morse morse = new Morse();
 		Iterator<Map.Entry<String,Cluster>> it = clusters.entrySet().iterator();
 		boolean found = false;
 		String response = "";
@@ -118,7 +133,7 @@ public class KMeans implements PatternAnalyzerService{
 				found = true;
 			}
 		}
-		return this.clusterToMorse.get(response);
+		return morse.getMorse(response);
 	}
 
 	public Map<String, Cluster> getClusters() {
@@ -141,5 +156,4 @@ public class KMeans implements PatternAnalyzerService{
 		if (!options.isEmpty())
 			this.options.poll().undo();
 	}
-
 }

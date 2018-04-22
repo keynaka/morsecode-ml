@@ -6,14 +6,14 @@ package ar.com.nnakasone.morsecode_ml.patternservice.kmeans;
  */
 public class Element {
 
-	private Float position;
+	private Float position; 
 	
 	private String type;
 	
 	private String value;
 
 	/**
-	 * 
+	 * Constructor de Clase
 	 */
 	public Element(String value) {
 		this.setPosition(value);

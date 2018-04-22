@@ -20,12 +20,28 @@ public class BinaryParser implements ParseService {
 		this.messageRequest = message;
 	}
 	
+	/**
+	 * Elimina los ruidos del inicio y fin del mensaje y
+	 * devuelve el mensaje separado por letra dentro de una lista.
+	 * @return parsedMessage
+	 */
+	@Override
 	public List<String> parse() {
-
 		cleanMessage(); 
 		return separateElements();
 	}
 
+	/**
+	 * Elimina los ruidos del inicio y fin del mensaje
+	 */
+	private void cleanMessage() {
+		this.messageRequest.setValue(this.messageRequest.getValue().replace("0", " ").trim().replace(" ", "0"));
+	}
+	
+	/**
+	 * Devuelve el mensaje separado por letra dentro de una lista.
+	 * @return parsedMessage
+	 */
 	private List<String> separateElements() {
 		List<String> parsedMessage = new ArrayList<String>();
 		String msg = messageRequest.getValue();
@@ -53,9 +69,5 @@ public class BinaryParser implements ParseService {
 
 	public void setMessageRequest(MessageRequest messageRequest) {
 		this.messageRequest = messageRequest;
-	}
-
-	private void cleanMessage() {
-		this.messageRequest.setValue(this.messageRequest.getValue().replace("0", " ").trim().replace(" ", "0"));
 	}
 }
