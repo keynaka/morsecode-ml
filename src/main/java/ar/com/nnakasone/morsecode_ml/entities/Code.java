@@ -1,6 +1,3 @@
-/**
- * 
- */
 package ar.com.nnakasone.morsecode_ml.entities;
 
 /**
@@ -8,7 +5,7 @@ package ar.com.nnakasone.morsecode_ml.entities;
  *
  */
 public interface Code {
-
+	
 	public String getCode(int i);
 	public int getSize();
 	public boolean exists(String value);

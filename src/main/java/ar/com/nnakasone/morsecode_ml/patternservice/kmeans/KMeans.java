@@ -2,6 +2,7 @@ package ar.com.nnakasone.morsecode_ml.patternservice.kmeans;
 
 import java.util.*;
 
+import ar.com.nnakasone.morsecode_ml.entities.Binary;
 import ar.com.nnakasone.morsecode_ml.patternservice.PatternAnalyzerService;
 
 /**
@@ -18,14 +19,6 @@ public class KMeans implements PatternAnalyzerService{
 	
 	private Queue<ChangeStrategy> options;
 	
-	private final String DOT = "DOT";
-	
-	private final String DASH = "DASH";
-	
-	private final String INNER_SPACE = "INNER_SPACE";
-	
-	private final String OUTER_SPACE = "OUTER_SPACE";
-			
 	/**
 	 * Construsctor de KMeans
 	 */
@@ -59,20 +52,20 @@ public class KMeans implements PatternAnalyzerService{
 		
 		Comparator<Element> c = (x, y) -> Float.compare(x.getPosition(), y.getPosition());
 		
-		clusters.put(DOT, new Cluster(dotDashElements.stream().min(c).get(), DOT));
-		clusters.put(DASH, new Cluster(dotDashElements.stream().max(c).get(), DASH));
+		clusters.put(Binary.DOT, new Cluster(dotDashElements.stream().min(c).get(), Binary.DOT));
+		clusters.put(Binary.DASH, new Cluster(dotDashElements.stream().max(c).get(), Binary.DASH));
 		
-		clusters.put(INNER_SPACE, new Cluster(spaceElements.stream().min(c).get(),INNER_SPACE));
-		clusters.put(OUTER_SPACE, new Cluster(spaceElements.stream().max(c).get(), OUTER_SPACE));
+		clusters.put(Binary.INNER_SPACE, new Cluster(spaceElements.stream().min(c).get(),Binary.INNER_SPACE));
+		clusters.put(Binary.OUTER_SPACE, new Cluster(spaceElements.stream().max(c).get(), Binary.OUTER_SPACE));
 	}
 	
 	private void initializeClusterToMorseMap() {
 		clusterToMorse = new HashMap<String,String>();
 		
-		clusterToMorse.put(DOT, ".");
-		clusterToMorse.put(DASH, "-");
-		clusterToMorse.put(INNER_SPACE, "");
-		clusterToMorse.put(OUTER_SPACE, " ");		
+		clusterToMorse.put(Binary.DOT, ".");
+		clusterToMorse.put(Binary.DASH, "-");
+		clusterToMorse.put(Binary.INNER_SPACE, "");
+		clusterToMorse.put(Binary.OUTER_SPACE, " ");		
 	}
 	
 	private void clasify() {
@@ -112,15 +105,6 @@ public class KMeans implements PatternAnalyzerService{
 		options.add(new InnerToOuterSpace(this));
 		options.add(new OuterToInnerSpace(this));
 	}
-	
-	//TODO: Borrar usado para Testing
-	public void showClusters() {
-		Iterator<Map.Entry<String,Cluster>> it = clusters.entrySet().iterator();
-		while (it.hasNext()) {
-			System.out.println(it.next());
-		}
-	}
-
 	@Override
 	public String determineValue(String value) {
 		Iterator<Map.Entry<String,Cluster>> it = clusters.entrySet().iterator();

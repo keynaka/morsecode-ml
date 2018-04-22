@@ -2,6 +2,8 @@ package ar.com.nnakasone.morsecode_ml.patternservice.kmeans;
 
 import java.util.*;
 
+import ar.com.nnakasone.morsecode_ml.entities.Binary;
+
 /**
  * @author Nicolas Nakasone
  *
@@ -13,14 +15,6 @@ public class Cluster {
 	private Set<Element> elements;
 	
 	private String type;
-	
-	private final static String DOT = "DOT";
-	
-	private final static String DASH = "DASH";
-	
-	private final static String INNER_SPACE = "INNER_SPACE";
-	
-	private final static String OUTER_SPACE = "OUTER_SPACE";
 	
 	/**
 	 * Constructor de Clase Cluster
@@ -87,10 +81,10 @@ public class Cluster {
 	public boolean isSameTypeWith(Element element) {
 		Map<String,String> map = new HashMap<String,String>();
 		
-		map.put(DOT, "1");
-		map.put(DASH, "1");
-		map.put(INNER_SPACE, "0");
-		map.put(OUTER_SPACE, "0");
+		map.put(Binary.DOT, "1");
+		map.put(Binary.DASH, "1");
+		map.put(Binary.INNER_SPACE, "0");
+		map.put(Binary.OUTER_SPACE, "0");
 			
 		return (element.getType().equals(map.get(this.type)));
 		
