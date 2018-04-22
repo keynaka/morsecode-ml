@@ -1,5 +1,6 @@
 package ar.com.nnakasone.morsecode_ml.translateservice;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -27,5 +28,18 @@ public class MorseToRomanTranslator extends RomanMorseTranslator{
 			map.put(morse.getCode(i), roman.getCode(i));
 		}
 	}		
+	
+	/**
+	 * Traduce mensaje de un codigo a otro
+	 * @param parsedMessage
+	 */
+	public String translate() {
+		String translatedMessage = "";
+		Iterator<String> it = this.parsedMessage.iterator();
+		while(it.hasNext()) {
+			translatedMessage = translatedMessage.concat(map.get(it.next()));
+		}
+		return translatedMessage;
+	}
 
 }

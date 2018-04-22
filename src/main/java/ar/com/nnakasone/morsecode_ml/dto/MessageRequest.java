@@ -17,6 +17,12 @@ public class MessageRequest {
 	}
 
 	/**
+	 * Constructor Vacio de Clase
+	 */
+	public MessageRequest() {
+	}
+
+	/**
 	 * Devuelve el mensaje cargado
 	 * @return value
 	 */

@@ -19,6 +19,13 @@ public class TranslatorController {
 	private ParseService parser;
 	
 	/**
+	 * Constructor vacio de Clase
+	 */
+	public TranslatorController() {
+		
+	}
+	
+	/**
 	 * Constructor de Clase TranslatorController
 	 * @param message 
 	 */

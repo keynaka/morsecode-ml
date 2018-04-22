@@ -12,9 +12,11 @@ public class KMeans implements PatternAnalyzerService{
 
 	private List<Element> elements;
 	
-	private List<Cluster> clusters;
+	private Map<String, Cluster> clusters;
 	
 	private Map<String, String> clusterToMorse;
+	
+	private Queue<ChangeStrategy> options;
 	
 	private final String DOT = "DOT";
 	
@@ -25,20 +27,12 @@ public class KMeans implements PatternAnalyzerService{
 	private final String OUTER_SPACE = "OUTER_SPACE";
 			
 	/**
-	 * 
+	 * Construsctor de KMeans
 	 */
 	public KMeans(List<String> parsedMessage) {
 		initialize(parsedMessage);
 		clasify();
-	}
-
-	private void initializeClusterToMorse() {
-		clusterToMorse = new HashMap<String,String>();
-		
-		clusterToMorse.put(DOT, ".");
-		clusterToMorse.put(DASH, "-");
-		clusterToMorse.put(INNER_SPACE, "");
-		clusterToMorse.put(OUTER_SPACE, " ");		
+		createOptions();
 	}
 
 	private void initialize(List<String> parsedMessage) {
@@ -57,19 +51,28 @@ public class KMeans implements PatternAnalyzerService{
 			elements.add(new Element(element));
 		}
 		initializeClusters(dotDashElements, spaceElements);
-		initializeClusterToMorse();
+		initializeClusterToMorseMap();
 	}
 	
 	private void initializeClusters(List<Element> dotDashElements, List<Element> spaceElements) {
-		clusters = new ArrayList<Cluster>();
+		clusters = new HashMap<String, Cluster>();
 		
 		Comparator<Element> c = (x, y) -> Float.compare(x.getPosition(), y.getPosition());
 		
-		clusters.add(new Cluster(dotDashElements.stream().min(c).get(), DOT));
-		clusters.add(new Cluster(dotDashElements.stream().max(c).get(), DASH));
+		clusters.put(DOT, new Cluster(dotDashElements.stream().min(c).get(), DOT));
+		clusters.put(DASH, new Cluster(dotDashElements.stream().max(c).get(), DASH));
 		
-		clusters.add(new Cluster(spaceElements.stream().min(c).get(),INNER_SPACE));
-		clusters.add(new Cluster(spaceElements.stream().max(c).get(), OUTER_SPACE));
+		clusters.put(INNER_SPACE, new Cluster(spaceElements.stream().min(c).get(),INNER_SPACE));
+		clusters.put(OUTER_SPACE, new Cluster(spaceElements.stream().max(c).get(), OUTER_SPACE));
+	}
+	
+	private void initializeClusterToMorseMap() {
+		clusterToMorse = new HashMap<String,String>();
+		
+		clusterToMorse.put(DOT, ".");
+		clusterToMorse.put(DASH, "-");
+		clusterToMorse.put(INNER_SPACE, "");
+		clusterToMorse.put(OUTER_SPACE, " ");		
 	}
 	
 	private void clasify() {
@@ -82,18 +85,18 @@ public class KMeans implements PatternAnalyzerService{
 	}
 
 	private Cluster nearestCluster(Element element) {		
-		Iterator<Cluster> it = clusters.iterator();
+		Iterator<Map.Entry<String,Cluster>> it = clusters.entrySet().iterator();
 		
 		Cluster minDistanceCluster = null;
 
 		while(it.hasNext()) {
-			Cluster cl = it.next();
+			Cluster cl = it.next().getValue();
 			
 			if (cl.isSameTypeWith(element)) {
 				if (minDistanceCluster == null) {
 					minDistanceCluster = cl;
 				} else {
-					if (minDistanceCluster.calculateDistanceToCentroid(element) >= cl.calculateDistanceToCentroid(element)) {
+					if (minDistanceCluster.calculateDistanceToCentroid(element) > cl.calculateDistanceToCentroid(element)) {
 						minDistanceCluster = cl;
 					}
 				}
@@ -102,8 +105,17 @@ public class KMeans implements PatternAnalyzerService{
 		return minDistanceCluster;
 	}
 	
+	private void createOptions() {
+		options = new LinkedList<ChangeStrategy>();
+		options.add(new DotToDash(this));
+		options.add(new DashToDot(this));
+		options.add(new InnerToOuterSpace(this));
+		options.add(new OuterToInnerSpace(this));
+	}
+	
+	//TODO: Borrar usado para Testing
 	public void showClusters() {
-		Iterator<Cluster> it = clusters.iterator();
+		Iterator<Map.Entry<String,Cluster>> it = clusters.entrySet().iterator();
 		while (it.hasNext()) {
 			System.out.println(it.next());
 		}
@@ -111,12 +123,12 @@ public class KMeans implements PatternAnalyzerService{
 
 	@Override
 	public String determineValue(String value) {
-		Iterator<Cluster> it = clusters.iterator();
+		Iterator<Map.Entry<String,Cluster>> it = clusters.entrySet().iterator();
 		boolean found = false;
 		String response = "";
 		
 		while(!found && it.hasNext()) {
-			Cluster cl = it.next();
+			Cluster cl = it.next().getValue();
 			if (cl.contains(value)) {
 				response = cl.getType();
 				found = true;
@@ -125,16 +137,25 @@ public class KMeans implements PatternAnalyzerService{
 		return this.clusterToMorse.get(response);
 	}
 
-	@Override
-	public boolean isOnlyOption() {
-		// TODO Auto-generated method stub
-		return false;
+	public Map<String, Cluster> getClusters() {
+		return clusters;
 	}
 
 	@Override
-	public void swap() {
-		// TODO Auto-generated method stub
-		
+	public boolean hasOtherOption() {
+		return !this.options.isEmpty();
+	}
+
+	@Override
+	public void change() {
+		if (!options.isEmpty())
+			this.options.peek().change();
+	}
+
+	@Override
+	public void undo() {
+		if (!options.isEmpty())
+			this.options.poll().undo();
 	}
 
 }

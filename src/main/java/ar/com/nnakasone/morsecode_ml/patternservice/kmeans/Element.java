@@ -57,4 +57,8 @@ public class Element {
 	public void setPosition(float i) {
 		this.position = i;
 	}
+	
+	public int hashCode() {
+		return 11 * this.value.hashCode() + 13 * this.value.hashCode();
+	}
 }

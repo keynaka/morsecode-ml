@@ -1,8 +1,8 @@
 package ar.com.nnakasone.morsecode_ml.translateservice;
 
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
+import ar.com.nnakasone.morsecode_ml.entities.*;
 import ar.com.nnakasone.morsecode_ml.patternservice.*;
 import ar.com.nnakasone.morsecode_ml.patternservice.kmeans.KMeans;
 
@@ -26,13 +26,58 @@ public class BinaryToMorseTranslator implements TranslateService {
 
 	@Override
 	public String translate() {
-		String translatedMessage = "";
-		Iterator<String> it = this.parsedMessage.iterator();
-		while(it.hasNext()) {
-			String value = it.next();
-			translatedMessage = translatedMessage.concat(pas.determineValue(value));
+		List<String> translatedMessage = new ArrayList<String>();
+		String result = "";
+		boolean firstTime = true;
+		
+		while (pas.hasOtherOption()) {
+			Iterator<String> it = this.parsedMessage.iterator();
+			while(it.hasNext()) {
+				String value = it.next();
+				translatedMessage.add(pas.determineValue(value));
+			}
+			
+			if (isValidMorseCode(translatedMessage)) {
+				return convertToString(translatedMessage);
+			} else {
+				if (firstTime) {
+					firstTime = false;
+				} else {
+					pas.undo();
+				}
+				translatedMessage.clear();
+				pas.change();
+			}
 		}
-		return translatedMessage;
+		return result; 
+	}
+
+	private String convertToString(List<String> translatedMessage) {
+		Iterator<String> it = translatedMessage.iterator();
+		String response = "";
+		while (it.hasNext()) {
+			response = response.concat(it.next());
+		}
+		return response;
+	}
+
+	private boolean isValidMorseCode(List<String> translatedMessage) {
+		Code morse = new Morse();
+		boolean response = true;
+		String aLetter = "";
+		
+		Iterator<String> it = translatedMessage.iterator();
+		while (it.hasNext() && response) {
+			String actual = it.next();
+			if (actual.equals(" ")) {
+				response = morse.exists(aLetter);		
+				aLetter = "";
+			} else {
+				aLetter = aLetter.concat(actual);				
+			}
+		}
+		
+		return response;
 	}
 
 }
