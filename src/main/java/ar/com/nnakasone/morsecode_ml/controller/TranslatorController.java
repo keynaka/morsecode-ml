@@ -2,6 +2,8 @@ package ar.com.nnakasone.morsecode_ml.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import ar.com.nnakasone.morsecode_ml.dto.MessageRequest;
 import ar.com.nnakasone.morsecode_ml.dto.MessageResponse;
 import ar.com.nnakasone.morsecode_ml.services.ParseService;
@@ -40,7 +42,12 @@ public class TranslatorController {
 		
 		translator = new BinaryToMorseTranslator(result);
 		
-		return new MessageResponse(translator.translate());
+		String translatedMessage = translator.translate();
+		int code = (translatedMessage != "" ? HttpServletResponse.SC_OK : HttpServletResponse.SC_FORBIDDEN);
+		
+		MessageResponse response = new MessageResponse(code, translatedMessage);
+		
+		return response;
 	}
 	
 	/**
@@ -54,7 +61,12 @@ public class TranslatorController {
 		
 		translator = new MorseToRomanTranslator(result);
 		
-		return new MessageResponse(translator.translate());
+		String translatedMessage = translator.translate();
+		int code = (translatedMessage != "" ? HttpServletResponse.SC_OK : HttpServletResponse.SC_FORBIDDEN);
+		
+		MessageResponse response = new MessageResponse(code, translatedMessage);
+		
+		return response;
 	}
 	
 	/**
@@ -68,6 +80,11 @@ public class TranslatorController {
 		
 		translator = new RomanToMorseTranslator(result);
 
-		return new MessageResponse(translator.translate());
+		String translatedMessage = translator.translate();
+		int code = (translatedMessage != "" ? HttpServletResponse.SC_OK : HttpServletResponse.SC_FORBIDDEN);
+		
+		MessageResponse response = new MessageResponse(code, translatedMessage);
+		
+		return response;
 	}
 }
