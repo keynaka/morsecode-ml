@@ -1,10 +1,10 @@
-# Morse Code - Mercado Libre
+# Morse Code - Mercado Libre S.R.L
 
 Autor: Nicolas Nakasone
 
 Fecha: 26/04/2018  
 
-# Objetivo
+# Enunciado
 Como todo lo “retro” últimamente está de moda, en MELI nos propusimos utilizar el telégrafo
 para comunicaciones entre distintos equipos utilizando código MORSE. En este contexto
 nuestro equipo se propone diseñar una solución que permita identificar los mensajes de
@@ -39,11 +39,35 @@ entre letras, palabras y finalización del mensaje.
 Se entiende aquí que una pausa prolongada o el ingreso de un “full stop” (.-.-.-) indica el fin
 del mensaje. No es requisito soportar ambos métodos de finalización.
 
+Se pide implementar en cualquier lenguaje de programación :
+
 1. Una función decodeBits2Morse que dada una secuencia de bits, retorne un
 string con el resultado en MORSE.
 
 2. Una función translate2Human que tome el string en MORSE y retorne un string
 legible por un humano. Se puede utilizar la tabla debajo como referencia.
+
+Nota:
+
+* Si desea utilizar un repositorio, de preferencia que sea privado (ej: bitbucket, gitlab)
+* Se deja a libre elección, el modo de transformar un input físico a bits.
+
+Bonus :
+
+1. Diseñar una API que permita traducir texto de MORSE a lenguaje humano y
+visceversa.
+2. Hostear la API en un cloud público (como app engine o cloud foundry) y enviar la
+URL para consulta
+
+Ejemplo:
+
+$ curl -X POST "http://meli.com/translate/2text" -d "{text: '.... --- .-.. .- -- . .-.. ..'}"
+
+{ code:200, response: 'HOLA MELI'}
+
+$ curl -X POST "http://meli.com/translate/2morse" -d "{text: 'HOLA MELI'}"
+
+{ code:200, response: '.... --- .-.. .- -- . .-.. ..'}
 
 # Hipotesis
 *	Se crearon las interfaces de servicio para parseo y traduccion pensando que a futuro podrian agregarse nuevos codigos.
