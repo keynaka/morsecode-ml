@@ -1,6 +1,6 @@
 # Morse Code - Mercado Libre S.R.L
 
-Autor: Nicolas Nakasone
+Autor: Nicolás Cristian Nakasone
 
 Fecha de Entrega: 26/04/2018  
 
@@ -71,8 +71,8 @@ $ curl -X POST "http://meli.com/translate/2morse" -d "{text: 'HOLA MELI'}"
 { code:200, response: '.... --- .-.. .- -- . .-.. ..'}
 ```
 # Hipotesis
-1.	Se crearon las interfaces de servicio para parseo y traduccion pensando que a futuro podrian agregarse nuevos codigos.
+1.	Se crearon las interfaces de servicio para parseo, traduccion y analisis de patron pensando que a futuro podrian agregarse nuevas implementaciones.
 
-2.	En caso de venir un character que no pertenezca a la tabla de traduccion entregada en el enunciado, el metodo entregara un String vacio.
+2.	En caso de venir un character que no pertenezca a la tabla de traduccion entregada en el enunciado, el metodo entregara un String vacio y tambien una UnknownCodeException.
 
 3. Se eligio la pausa prolongada para indicar el fin del mensaje.
