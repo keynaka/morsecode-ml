@@ -1,5 +1,7 @@
 package ar.com.nnakasone.morsecode_ml.services.patternanalyzer;
 
+import java.util.Objects;
+
 /**
  * @author Nicolas Nakasone
  *
@@ -67,8 +69,23 @@ public class Element {
 	public void setPosition(float i) {
 		this.position = i;
 	}
-	
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null || getClass() != obj.getClass()) {
+			return false;
+		}
+		final Element other = (Element) obj;
+		if (!Objects.equals(this.value, other.value)) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
 	public int hashCode() {
-		return 11 * this.value.hashCode() + 13 * this.value.hashCode();
+		int hash = 7;
+		hash = 89 * hash + Objects.hashCode(this.value);
+		return hash;
 	}
 }
