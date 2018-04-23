@@ -52,7 +52,7 @@ Nota:
 * Si desea utilizar un repositorio, de preferencia que sea privado (ej: bitbucket, gitlab)
 * Se deja a libre elección, el modo de transformar un input físico a bits.
 
-Bonus :
+**Bonus :**
 
 1. Diseñar una API que permita traducir texto de MORSE a lenguaje humano y
 visceversa.
@@ -60,7 +60,7 @@ visceversa.
 URL para consulta
 
 Ejemplo:
-
+```
 $ curl -X POST "http://meli.com/translate/2text" -d "{text: '.... --- .-.. .- -- . .-.. ..'}"
 
 { code:200, response: 'HOLA MELI'}
@@ -68,7 +68,7 @@ $ curl -X POST "http://meli.com/translate/2text" -d "{text: '.... --- .-.. .- --
 $ curl -X POST "http://meli.com/translate/2morse" -d "{text: 'HOLA MELI'}"
 
 { code:200, response: '.... --- .-.. .- -- . .-.. ..'}
-
+```
 # Hipotesis
 *	Se crearon las interfaces de servicio para parseo y traduccion pensando que a futuro podrian agregarse nuevos codigos.
 
