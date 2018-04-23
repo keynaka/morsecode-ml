@@ -54,7 +54,7 @@ public class TranslatorController {
 	 * Traduce un mensaje en morse a romano
 	 * @return value
 	 */
-	@RequestMapping(method = RequestMethod.POST, value="/2text", produces = "application/json")
+	@RequestMapping(method = RequestMethod.POST, value="/translate/2text", produces = "application/json")
 	public MessageResponse translate2Human(@RequestBody MessageRequest messageRequest) {
 		parser = new MorseParser(messageRequest);
 		List<String> result = parser.parse();
@@ -73,7 +73,7 @@ public class TranslatorController {
 	 * Traduce un mensaje en romano a morse
 	 * @return
 	 */
-	@RequestMapping(method = RequestMethod.POST, value="/2morse", produces = "application/json")
+	@RequestMapping(method = RequestMethod.POST, value="/translate/2morse", produces = "application/json")
 	public MessageResponse translate2Morse(@RequestBody MessageRequest messageRequest) {
 		parser = new RomanParser(messageRequest);
 		List<String> result = parser.parse();
