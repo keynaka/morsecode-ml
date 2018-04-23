@@ -4,6 +4,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import ar.com.nnakasone.morsecode_ml.exception.UnknownCodeException;
+
 /**
  * @author Nicolas Nakasone
  *
@@ -11,8 +13,6 @@ import java.util.Map;
 public class RomanToMorseTranslator extends RomanMorseTranslator {
 
 	private final String OTHER_LETTER_SEPARATOR = " ";
-	
-	private final String EMPTY_ANSWER = "";
 	
 	/**
 	 * Constructor
@@ -36,7 +36,7 @@ public class RomanToMorseTranslator extends RomanMorseTranslator {
 	 * Traduce mensaje de romano a morse
 	 * @param parsedMessage
 	 */
-	public String translate() {
+	public String translate() throws UnknownCodeException{
 		String translatedMessage = "";
 		Iterator<String> it = this.parsedMessage.iterator();
 		while(it.hasNext()) {
@@ -46,7 +46,7 @@ public class RomanToMorseTranslator extends RomanMorseTranslator {
 				if (!value.equals(" "))
 					translatedMessage = translatedMessage.concat(OTHER_LETTER_SEPARATOR);
 			} else {
-				return EMPTY_ANSWER;
+				throw new UnknownCodeException("El codigo ingresado no es traducible");
 			}
 		}
 		

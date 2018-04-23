@@ -13,8 +13,6 @@ import ar.com.nnakasone.morsecode_ml.exception.UnknownCodeException;
 
 public class MorseToRomanTranslator extends RomanMorseTranslator {
 	
-	private final String EMPTY_ANSWER = "";
-
 	/**
 	 * Constructor
 	 */

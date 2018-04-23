@@ -2,6 +2,13 @@ package ar.com.nnakasone.morsecode_ml;
 
 import ar.com.nnakasone.morsecode_ml.controller.TranslatorController;
 import ar.com.nnakasone.morsecode_ml.dto.MessageRequest;
+import ar.com.nnakasone.morsecode_ml.exception.UnknownCodeException;
+import ar.com.nnakasone.morsecode_ml.services.ParseService;
+import ar.com.nnakasone.morsecode_ml.services.TranslateService;
+import ar.com.nnakasone.morsecode_ml.services.parser.MorseParser;
+import ar.com.nnakasone.morsecode_ml.services.parser.RomanParser;
+import ar.com.nnakasone.morsecode_ml.services.translator.MorseToRomanTranslator;
+import ar.com.nnakasone.morsecode_ml.services.translator.RomanToMorseTranslator;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -58,9 +65,18 @@ public class AppTest {
 	
 	@Test
 	public void testNonExistentMorseCodeShouldAnEmptyAnswer() {
-		messageRequest.setValue("------");
+		boolean thrown = false;
 		
-		Assert.assertEquals("", this.translatorController.translate2Human(messageRequest).getResponse());
+		messageRequest.setValue("------");
+		ParseService ps = new MorseParser(messageRequest);
+		TranslateService ts = new MorseToRomanTranslator(ps.parse());
+		
+		try {
+			ts.translate();
+		} catch	(UnknownCodeException uce) {
+			thrown = true;
+		}
+		Assert.assertTrue(thrown);
 	}
 	
 	/* -----------------------Test de Metodo: translate2Morse()------------------------------ */ 
@@ -95,9 +111,18 @@ public class AppTest {
 	
 	@Test
 	public void testHolaMeliHumanWithExclamationMarkCodeShouldGiveAnEmptyAnswer() {
+		boolean thrown = false;
+
 		messageRequest.setValue("HOLAMELI!");
+		ParseService ps = new RomanParser(messageRequest);
+		TranslateService ts = new RomanToMorseTranslator(ps.parse());
 		
-		Assert.assertEquals("", this.translatorController.translate2Morse(messageRequest).getResponse());
+		try {
+			ts.translate();
+		} catch	(UnknownCodeException uce) {
+			thrown = true;
+		}
+		Assert.assertTrue(thrown);
 	}
 	
 	@Test
