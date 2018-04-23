@@ -7,6 +7,7 @@ import java.util.Map;
 import ar.com.nnakasone.morsecode_ml.entities.*;
 import ar.com.nnakasone.morsecode_ml.entities.Morse;
 import ar.com.nnakasone.morsecode_ml.entities.Roman;
+import ar.com.nnakasone.morsecode_ml.exception.UnknownCodeException;
 import ar.com.nnakasone.morsecode_ml.services.TranslateService;
 
 /**
@@ -34,7 +35,7 @@ public abstract class RomanMorseTranslator implements TranslateService {
 		this.parsedMessage = parsedMessage;
 	}
 	
-	public abstract String translate();
+	public abstract String translate() throws UnknownCodeException;
 	
 	public abstract void iniciateMap(Map<String,String> map);
 }

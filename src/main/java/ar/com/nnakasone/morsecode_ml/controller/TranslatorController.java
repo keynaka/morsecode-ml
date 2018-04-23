@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import ar.com.nnakasone.morsecode_ml.dto.MessageRequest;
 import ar.com.nnakasone.morsecode_ml.dto.MessageResponse;
+import ar.com.nnakasone.morsecode_ml.exception.UnknownCodeException;
 import ar.com.nnakasone.morsecode_ml.services.ParseService;
 import ar.com.nnakasone.morsecode_ml.services.TranslateService;
 import ar.com.nnakasone.morsecode_ml.services.parser.*;
@@ -42,14 +43,9 @@ public class TranslatorController {
 		
 		translator = new BinaryToMorseTranslator(result);
 		
-		String translatedMessage = translator.translate();
-		int code = (translatedMessage != "" ? HttpServletResponse.SC_OK : HttpServletResponse.SC_FORBIDDEN);
-		
-		MessageResponse response = new MessageResponse(code, translatedMessage);
-		
-		return response;
+		return translate();
 	}
-	
+
 	/**
 	 * Traduce un mensaje en morse a romano
 	 * @return value
@@ -61,12 +57,7 @@ public class TranslatorController {
 		
 		translator = new MorseToRomanTranslator(result);
 		
-		String translatedMessage = translator.translate();
-		int code = (translatedMessage != "" ? HttpServletResponse.SC_OK : HttpServletResponse.SC_FORBIDDEN);
-		
-		MessageResponse response = new MessageResponse(code, translatedMessage);
-		
-		return response;
+		return translate();
 	}
 	
 	/**
@@ -80,11 +71,26 @@ public class TranslatorController {
 		
 		translator = new RomanToMorseTranslator(result);
 
-		String translatedMessage = translator.translate();
-		int code = (translatedMessage != "" ? HttpServletResponse.SC_OK : HttpServletResponse.SC_FORBIDDEN);
-		
-		MessageResponse response = new MessageResponse(code, translatedMessage);
-		
-		return response;
+		return translate();
+	}
+	
+	/**
+	 * Traduce el mensaje dependiendo el traductor elegido
+	 * 
+	 * @return messageResponse
+	 * @throws UnknownCodeException
+	 */
+	private MessageResponse translate() {
+		try {
+			String translatedMessage = translator.translate();
+			int code = (translatedMessage != "" ? HttpServletResponse.SC_OK : HttpServletResponse.SC_FORBIDDEN);
+			
+			return new MessageResponse(code, translatedMessage);			
+		} catch (UnknownCodeException uce) {
+			uce.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return new MessageResponse(HttpServletResponse.SC_FORBIDDEN, "");
 	}
 }
