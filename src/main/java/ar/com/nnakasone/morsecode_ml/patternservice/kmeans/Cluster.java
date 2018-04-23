@@ -2,6 +2,8 @@ package ar.com.nnakasone.morsecode_ml.patternservice.kmeans;
 
 import java.util.*;
 
+import ar.com.nnakasone.morsecode_ml.entities.Morse;
+
 /**
  * @author Nicolas Nakasone
  *
@@ -13,14 +15,6 @@ public class Cluster {
 	private Set<Element> elements;
 	
 	private String type;
-	
-	private final static String DOT = "DOT";
-	
-	private final static String DASH = "DASH";
-	
-	private final static String INNER_SPACE = "INNER_SPACE";
-	
-	private final static String OUTER_SPACE = "OUTER_SPACE";
 	
 	/**
 	 * Constructor de Clase Cluster
@@ -53,6 +47,9 @@ public class Cluster {
 		recalculateCentroid();
 	}
 	
+	/**
+	 * Recalcula la posicion del centroide dependiendo de los elementos que tiene el cluster y la cantidad.
+	 */
 	public void recalculateCentroid() {
 		float result = centroid.getPosition();
 		int j = 1;
@@ -67,6 +64,11 @@ public class Cluster {
 		this.centroid.setPosition(result/j);
 	}
 	
+	/**
+	 * Calcula la disntacio del centroide de este cluster a un cierto elemento
+	 * @param element
+	 * @return
+	 */
 	public float calculateDistanceToCentroid(Element element) {
 		return element.distance(centroid);
 	}
@@ -83,19 +85,33 @@ public class Cluster {
 		
 		return clusterInfo;
 	}
-
+	
+	/**
+	 * Devuelve si un elemento es del mismo tipo que el de este cluster. 
+	 * Recordar que los elementos no saben si son:
+	 * 	DASH/DOT
+	 * 	INNER_SPACE/OUTER_SPACE
+	 * Solo saben que son o 1 o 0;
+	 * 
+	 * @param element
+	 * @return
+	 */
 	public boolean isSameTypeWith(Element element) {
 		Map<String,String> map = new HashMap<String,String>();
 		
-		map.put(DOT, "1");
-		map.put(DASH, "1");
-		map.put(INNER_SPACE, "0");
-		map.put(OUTER_SPACE, "0");
+		map.put(Morse.DOT, "1");
+		map.put(Morse.DASH, "1");
+		map.put(Morse.INNER_SPACE, "0");
+		map.put(Morse.OUTER_SPACE, "0");
 			
 		return (element.getType().equals(map.get(this.type)));
-		
 	}
 
+	/**
+	 * Devuelve si el cluster contiene a algun elemento que tenga dicho valor
+	 * @param value
+	 * @return answer
+	 */
 	public boolean contains(String value) {
 		Iterator<Element> it = elements.iterator();
 		while (it.hasNext()) {

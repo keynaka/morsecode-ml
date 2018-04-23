@@ -33,6 +33,10 @@ public class TranslatorController {
 		this.message = message;
 	}
 	
+	/**
+	 * Setea un mensaje diferente al TranslatorController
+	 * @param mr
+	 */
 	public void setMessage(MessageRequest mr) {
 		this.message = mr;
 	}

@@ -1,8 +1,8 @@
 package ar.com.nnakasone.morsecode_ml.patternservice;
 
 /**
+ * Interfaz del servicio utilizado para determinar los patrones asociados a un mensaje
  * @author Nicolas Nakasone
- *
  */
 public interface PatternAnalyzerService {
 	public String determineValue(String value);

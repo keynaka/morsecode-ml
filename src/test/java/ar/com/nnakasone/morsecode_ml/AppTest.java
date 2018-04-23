@@ -61,11 +61,27 @@ public class AppTest {
 		Assert.assertEquals("0123456789", this.translatorController.translate2Human());
 	}
 	
+	@Test
+	public void testNonExistentMorseCodeShouldAnEmptyAnswer() {
+		messageRequest.setValue("------");
+		translatorController.setMessage(messageRequest);
+		
+		Assert.assertEquals("", this.translatorController.translate2Human());
+	}
+	
 	/* -----------------------Test de Metodo: translate2Morse()------------------------------ */ 
 	
 	@Test
 	public void testHolaMeliHumanCodeShouldGiveAHolaMeliMorseCode() {
 		messageRequest.setValue("HOLAMELI");
+		translatorController.setMessage(messageRequest);
+		
+		Assert.assertEquals(".... --- .-.. .- -- . .-.. ..", this.translatorController.translate2Morse());
+	}
+	
+	@Test
+	public void testHolaMeliInUnderCaseHumanCodeShouldGiveAHolaMeliMorseCode() {
+		messageRequest.setValue("holameli");
 		translatorController.setMessage(messageRequest);
 		
 		Assert.assertEquals(".... --- .-.. .- -- . .-.. ..", this.translatorController.translate2Morse());
@@ -85,6 +101,14 @@ public class AppTest {
 		translatorController.setMessage(messageRequest);
 		
 		Assert.assertEquals(".... --- .-.. .-    -- . .-.. ..", this.translatorController.translate2Morse());
+	}
+	
+	@Test
+	public void testHolaMeliHumanWithExclamationMarkCodeShouldGiveAnEmptyAnswer() {
+		messageRequest.setValue("HOLAMELI!");
+		translatorController.setMessage(messageRequest);
+		
+		Assert.assertEquals("", this.translatorController.translate2Morse());
 	}
 	
 	@Test

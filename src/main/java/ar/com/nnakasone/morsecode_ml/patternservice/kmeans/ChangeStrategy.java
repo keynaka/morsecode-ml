@@ -15,24 +15,37 @@ public abstract class ChangeStrategy {
 	
 	protected Element selectedElement;
 	
+	private boolean changed;
+	
 	/**
 	 * Constructor del ChangeStrategy
 	 */
 	public ChangeStrategy(KMeans kmeans) {
 		this.kmeans = kmeans;
+		this.changed = false;
 	}
 
+	/**
+	 * Cambia de lugar un elemento borde de un cluster, dependiendo la estrategia implementada
+	 */
 	public void change() {
 		if (selectedElement != null) {
 			receiver.add(selectedElement);
-			giver.delete(selectedElement);			
+			giver.delete(selectedElement);	
+			this.changed = true;
 		}
 	}
 	
+	/**
+	 * Deshace el cambio realizado
+	 * @see 
+	 */
 	public void undo() {
-		if (selectedElement != null) {
-			giver.add(selectedElement);
-			receiver.delete(selectedElement);
+		if (changed) {
+			if (selectedElement != null) {
+				giver.add(selectedElement);
+				receiver.delete(selectedElement);
+			}	
 		}
 	}
 }

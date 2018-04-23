@@ -6,14 +6,14 @@ package ar.com.nnakasone.morsecode_ml.patternservice.kmeans;
  */
 public class Element {
 
-	private Float position;
+	private Float position; 
 	
 	private String type;
 	
 	private String value;
 
 	/**
-	 * 
+	 * Constructor de Clase
 	 */
 	public Element(String value) {
 		this.setPosition(value);
@@ -46,12 +46,22 @@ public class Element {
 		this.value = value;
 	}
 
+	/**
+	 * Devuelve la distancia entre un elemento y otro
+	 * @param e
+	 * @return
+	 */
 	public float distance(Element e) {
 		return Math.abs(this.position - e.getPosition());
 	}
 	
-	public float distance(int centroid) {
-		return Math.abs(this.position - centroid);
+	/**
+	 * Devuelve la distancia de este elemento a un cierto valor
+	 * @param value
+	 * @return
+	 */
+	public float distance(int value) {
+		return Math.abs(this.position - value);
 	}
 
 	public void setPosition(float i) {
