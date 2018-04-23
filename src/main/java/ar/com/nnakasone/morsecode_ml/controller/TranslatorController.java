@@ -2,20 +2,27 @@ package ar.com.nnakasone.morsecode_ml.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import ar.com.nnakasone.morsecode_ml.dto.MessageRequest;
+import ar.com.nnakasone.morsecode_ml.dto.MessageResponse;
 import ar.com.nnakasone.morsecode_ml.services.ParseService;
 import ar.com.nnakasone.morsecode_ml.services.TranslateService;
 import ar.com.nnakasone.morsecode_ml.services.parser.*;
 import ar.com.nnakasone.morsecode_ml.services.translator.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author Nicolas Nakasone
  *
  */
+
+@RestController
 public class TranslatorController {
 
-	private MessageRequest message;
-	
 	private TranslateService translator;
 	
 	private ParseService parser;
@@ -23,62 +30,61 @@ public class TranslatorController {
 	/**
 	 * Constructor vacio de Clase
 	 */
-	public TranslatorController() {
-		
-	}
-	
-	/**
-	 * Constructor de Clase TranslatorController
-	 * @param message 
-	 */
-	public TranslatorController(MessageRequest message) {
-		this.message = message;
-	}
-	
-	/**
-	 * Setea un mensaje diferente al TranslatorController
-	 * @param mr
-	 */
-	public void setMessage(MessageRequest mr) {
-		this.message = mr;
-	}
+	public TranslatorController() {}
 
 	/**
 	 * Traduce un mensaje en binario a morse
 	 * @return value
 	 */
-	public String decodeBits2Morse() {
-		parser = new BinaryParser(this.message);
+	public MessageResponse decodeBits2Morse(MessageRequest messageRequest) {
+		parser = new BinaryParser(messageRequest);
 		List<String> result = parser.parse();
 		
 		translator = new BinaryToMorseTranslator(result);
 		
-		return translator.translate();
+		String translatedMessage = translator.translate();
+		int code = (translatedMessage != "" ? HttpServletResponse.SC_OK : HttpServletResponse.SC_FORBIDDEN);
+		
+		MessageResponse response = new MessageResponse(code, translatedMessage);
+		
+		return response;
 	}
 	
 	/**
 	 * Traduce un mensaje en morse a romano
 	 * @return value
 	 */
-	public String translate2Human() {
-		parser = new MorseParser(this.message);
+	@RequestMapping(method = RequestMethod.POST, value="/2text", produces = "application/json")
+	public MessageResponse translate2Human(@RequestBody MessageRequest messageRequest) {
+		parser = new MorseParser(messageRequest);
 		List<String> result = parser.parse();
 		
 		translator = new MorseToRomanTranslator(result);
 		
-		return translator.translate();
+		String translatedMessage = translator.translate();
+		int code = (translatedMessage != "" ? HttpServletResponse.SC_OK : HttpServletResponse.SC_FORBIDDEN);
+		
+		MessageResponse response = new MessageResponse(code, translatedMessage);
+		
+		return response;
 	}
 	
 	/**
 	 * Traduce un mensaje en romano a morse
 	 * @return
 	 */
-	public String translate2Morse() {
-		parser = new RomanParser(this.message);
+	@RequestMapping(method = RequestMethod.POST, value="/2morse", produces = "application/json")
+	public MessageResponse translate2Morse(@RequestBody MessageRequest messageRequest) {
+		parser = new RomanParser(messageRequest);
 		List<String> result = parser.parse();
 		
 		translator = new RomanToMorseTranslator(result);
 
-		return translator.translate();
+		String translatedMessage = translator.translate();
+		int code = (translatedMessage != "" ? HttpServletResponse.SC_OK : HttpServletResponse.SC_FORBIDDEN);
+		
+		MessageResponse response = new MessageResponse(code, translatedMessage);
+		
+		return response;
 	}
 }

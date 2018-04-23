@@ -31,7 +31,7 @@ public class RomanParser implements ParseService {
 	 * @return parsedMessage
 	 */
 	public List<String> parse() {
-		return new ArrayList<String>(Arrays.asList(messageRequest.getValue().split("")));
+		return new ArrayList<String>(Arrays.asList(messageRequest.getText().split("")));
 	}
 
 }

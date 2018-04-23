@@ -6,14 +6,14 @@ package ar.com.nnakasone.morsecode_ml.dto;
  */
 public class MessageRequest {
 
-	private String value;
+	private String text;
 	
 	/**
 	 * Constructor de MessageRequest
 	 * @param value
 	 */
-	public MessageRequest(String value) {
-		this.value = value;
+	public MessageRequest(String text) {
+		this.text = text;
 	}
 
 	/**
@@ -26,8 +26,8 @@ public class MessageRequest {
 	 * Devuelve el mensaje cargado
 	 * @return value
 	 */
-	public String getValue() {
-		return value;
+	public String getText() {
+		return text;
 	}
 	
 	/**
@@ -35,7 +35,7 @@ public class MessageRequest {
 	 * @param value
 	 */
 	public void setValue(String value) {
-		this.value = value;
+		this.text = value;
 	}
 	
 	/**
@@ -43,7 +43,7 @@ public class MessageRequest {
 	 * @return longitud
 	 */
 	public int getLength() {
-			return this.value.length();
+			return this.text.length();
 	}
 
 	

@@ -28,7 +28,7 @@ public class MorseParser implements ParseService {
 	 * @return parsedMessage
 	 */
 	public List<String> parse() {
-		List<String> parsedMessage = new ArrayList<String>(Arrays.asList(messageRequest.getValue().split("\\s")));
+		List<String> parsedMessage = new ArrayList<String>(Arrays.asList(messageRequest.getText().split("\\s")));
 		
 		//TODO: mejorar problema de los espacios
 		for (int i=0 ; i<parsedMessage.size() ; i++) {

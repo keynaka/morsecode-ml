@@ -4,11 +4,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-
 /**
  * @author Nicolas Nakasone
  *
  */
+
 public class MorseToRomanTranslator extends RomanMorseTranslator{
 	
 	private final String EMPTY_ANSWER = "";
