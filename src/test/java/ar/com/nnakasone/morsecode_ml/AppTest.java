@@ -25,42 +25,42 @@ public class AppTest {
 	public void testHolaMeliMorseCodeShouldGiveAHolaMeliHumanCode() {
 		messageRequest.setValue(".... --- .-.. .- -- . .-.. ..");
 		
-		Assert.assertEquals("HOLAMELI", this.translatorController.translate2Human(messageRequest));
+		Assert.assertEquals("HOLAMELI", this.translatorController.translate2Human(messageRequest).getResponse());
 	}
 	
 	@Test
 	public void testHolaMeliWithSpaceMorseCodeShouldGiveAHolaMeliWithSpaceHumanCode() {
 		messageRequest.setValue(".... --- .-.. .-  -- . .-.. ..");
 		
-		Assert.assertEquals("HOLA MELI", this.translatorController.translate2Human(messageRequest));
+		Assert.assertEquals("HOLA MELI", this.translatorController.translate2Human(messageRequest).getResponse());
 	}
 	
 	@Test
 	public void testHolaMeliWithTripeSpaceMorseCodeShouldGiveAHolaMeliWithTripleSpaceHumanCode() {
 		messageRequest.setValue(".... --- .-.. .-    -- . .-.. ..");
 		
-		Assert.assertEquals("HOLA   MELI", this.translatorController.translate2Human(messageRequest));
+		Assert.assertEquals("HOLA   MELI", this.translatorController.translate2Human(messageRequest).getResponse());
 	}
 	
 	@Test
 	public void testAlphabetInMorseCodeShouldGiveAlphabetInHumanCode() {
 		messageRequest.setValue(".- -... -.-. -.. . ..-. --. .... .. .--- -.- .-.. -- -. --- .--. --.- .-. ... - ..- ...- .-- -..- -.-- --..");
 		
-		Assert.assertEquals("ABCDEFGHIJKLMNOPQRSTUVWXYZ", this.translatorController.translate2Human(messageRequest));
+		Assert.assertEquals("ABCDEFGHIJKLMNOPQRSTUVWXYZ", this.translatorController.translate2Human(messageRequest).getResponse());
 	}
 	
 	@Test
 	public void testNumbersInMorseCodeShouldGiveNumbersInHumanCode() {
 		messageRequest.setValue("----- .---- ..--- ...-- ....- ..... -.... --... ---.. ----.");
 		
-		Assert.assertEquals("0123456789", this.translatorController.translate2Human(messageRequest));
+		Assert.assertEquals("0123456789", this.translatorController.translate2Human(messageRequest).getResponse());
 	}
 	
 	@Test
 	public void testNonExistentMorseCodeShouldAnEmptyAnswer() {
 		messageRequest.setValue("------");
 		
-		Assert.assertEquals("", this.translatorController.translate2Human(messageRequest));
+		Assert.assertEquals("", this.translatorController.translate2Human(messageRequest).getResponse());
 	}
 	
 	/* -----------------------Test de Metodo: translate2Morse()------------------------------ */ 
@@ -69,49 +69,49 @@ public class AppTest {
 	public void testHolaMeliHumanCodeShouldGiveAHolaMeliMorseCode() {
 		messageRequest.setValue("HOLAMELI");
 		
-		Assert.assertEquals(".... --- .-.. .- -- . .-.. ..", this.translatorController.translate2Morse(messageRequest));
+		Assert.assertEquals(".... --- .-.. .- -- . .-.. ..", this.translatorController.translate2Morse(messageRequest).getResponse());
 	}
 	
 	@Test
 	public void testHolaMeliInUnderCaseHumanCodeShouldGiveAHolaMeliMorseCode() {
 		messageRequest.setValue("holameli");
 		
-		Assert.assertEquals(".... --- .-.. .- -- . .-.. ..", this.translatorController.translate2Morse(messageRequest));
+		Assert.assertEquals(".... --- .-.. .- -- . .-.. ..", this.translatorController.translate2Morse(messageRequest).getResponse());
 	}
 	
 	@Test
 	public void testHolaMeliWithSpaceHumanCodeShouldGiveAHolaMeliWithSpaceMorseCode() {
 		messageRequest.setValue("HOLA MELI");
 		
-		Assert.assertEquals(".... --- .-.. .-  -- . .-.. ..", this.translatorController.translate2Morse(messageRequest));
+		Assert.assertEquals(".... --- .-.. .-  -- . .-.. ..", this.translatorController.translate2Morse(messageRequest).getResponse());
 	}
 	
 	@Test
 	public void testHolaMeliWithTripeSpaceHumanCodeShouldGiveAHolaMeliWithTripleSpaceMorseCode() {
 		messageRequest.setValue("HOLA   MELI");
 		
-		Assert.assertEquals(".... --- .-.. .-    -- . .-.. ..", this.translatorController.translate2Morse(messageRequest));
+		Assert.assertEquals(".... --- .-.. .-    -- . .-.. ..", this.translatorController.translate2Morse(messageRequest).getResponse());
 	}
 	
 	@Test
 	public void testHolaMeliHumanWithExclamationMarkCodeShouldGiveAnEmptyAnswer() {
 		messageRequest.setValue("HOLAMELI!");
 		
-		Assert.assertEquals("", this.translatorController.translate2Morse(messageRequest));
+		Assert.assertEquals("", this.translatorController.translate2Morse(messageRequest).getResponse());
 	}
 	
 	@Test
 	public void testAlphabetInHumanCodeShouldGiveAlphabetInMorseCode() {
 		messageRequest.setValue("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
 		
-		Assert.assertEquals(".- -... -.-. -.. . ..-. --. .... .. .--- -.- .-.. -- -. --- .--. --.- .-. ... - ..- ...- .-- -..- -.-- --..", this.translatorController.translate2Morse(messageRequest));
+		Assert.assertEquals(".- -... -.-. -.. . ..-. --. .... .. .--- -.- .-.. -- -. --- .--. --.- .-. ... - ..- ...- .-- -..- -.-- --..", this.translatorController.translate2Morse(messageRequest).getResponse());
 	}
 	
 	@Test
 	public void testNumbersInHumanCodeShouldGiveNumbersInMorseCode() {
 		messageRequest.setValue("0123456789");
 		
-		Assert.assertEquals("----- .---- ..--- ...-- ....- ..... -.... --... ---.. ----.", this.translatorController.translate2Morse(messageRequest));
+		Assert.assertEquals("----- .---- ..--- ...-- ....- ..... -.... --... ---.. ----.", this.translatorController.translate2Morse(messageRequest).getResponse());
 	}
 	
 	/* -----------------------Test de Metodo: decodeBits2Morse()------------------------------ */ 
@@ -120,21 +120,21 @@ public class AppTest {
 	public void testHolaBinaryCodeShouldGiveAHolaMorseCode() {
 		messageRequest.setValue("000000000000110011011001100000011111110111111111110111111111000000000010111111110110011000000010111111100000000");
 		
-		Assert.assertEquals(".... --- .-.. .-", this.translatorController.decodeBits2Morse(messageRequest));
+		Assert.assertEquals(".... --- .-.. .-", this.translatorController.decodeBits2Morse(messageRequest).getResponse());
 	}
 	
 	@Test
 	public void testXInBinaryCodeWithoutNoiseShouldGiveXiInMorseCode() {
 		messageRequest.setValue("1111111111010101111111");
 		
-		Assert.assertEquals("-..-", this.translatorController.decodeBits2Morse(messageRequest));
+		Assert.assertEquals("-..-", this.translatorController.decodeBits2Morse(messageRequest).getResponse());
 	}
 	
 	@Test
 	public void testNoMatterHowManyNoiseHasAnXInBinaryCodeItShouldGiveAnXInMorseCode() {
 		messageRequest.setValue("00000000000000000000000000000000000000000000000000000000000000000111111111111010101111111111000000000000000000000000000000000000000000000");
 		
-		Assert.assertEquals("-..-", this.translatorController.decodeBits2Morse(messageRequest));
+		Assert.assertEquals("-..-", this.translatorController.decodeBits2Morse(messageRequest).getResponse());
 	}
 	
 	
@@ -146,6 +146,6 @@ public class AppTest {
 	public void testMisinterpretableElementShouldGiveApropiateAnswer() {
 		messageRequest.setValue("101010101001000001");
 		
-		Assert.assertEquals("..... . .", this.translatorController.decodeBits2Morse(messageRequest));
+		Assert.assertEquals("..... . .", this.translatorController.decodeBits2Morse(messageRequest).getResponse());
 	}
 }
