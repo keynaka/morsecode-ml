@@ -2,7 +2,7 @@
 
 Autor: Nicolas Nakasone
 
-Fecha: 26/04/2018  
+Fecha de Entrega: 26/04/2018  
 
 # Enunciado
 Como todo lo “retro” últimamente está de moda, en MELI nos propusimos utilizar el telégrafo
@@ -51,6 +51,8 @@ Nota:
 
 * Si desea utilizar un repositorio, de preferencia que sea privado (ej: bitbucket, gitlab)
 * Se deja a libre elección, el modo de transformar un input físico a bits.
+
+---
 
 **Bonus :**
 
