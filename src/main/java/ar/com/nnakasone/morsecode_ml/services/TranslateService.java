@@ -2,6 +2,8 @@ package ar.com.nnakasone.morsecode_ml.services;
 
 import org.springframework.stereotype.Service;
 
+import ar.com.nnakasone.morsecode_ml.exception.UnknownCodeException;
+
 /**
  * @author Nicolas Nakasone
  *
@@ -9,6 +11,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface TranslateService {
-	public String translate();
+	public String translate() throws UnknownCodeException;
 }
  

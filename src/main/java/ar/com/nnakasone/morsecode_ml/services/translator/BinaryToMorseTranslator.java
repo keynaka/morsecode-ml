@@ -3,6 +3,7 @@ package ar.com.nnakasone.morsecode_ml.services.translator;
 import java.util.*;
 
 import ar.com.nnakasone.morsecode_ml.entities.*;
+import ar.com.nnakasone.morsecode_ml.exception.UnknownCodeException;
 import ar.com.nnakasone.morsecode_ml.services.PatternAnalyzerService;
 import ar.com.nnakasone.morsecode_ml.services.TranslateService;
 import ar.com.nnakasone.morsecode_ml.services.patternanalyzer.KMeans;
@@ -30,9 +31,8 @@ public class BinaryToMorseTranslator implements TranslateService {
 	 * @return result
 	 */
 	@Override
-	public String translate() {
+	public String translate() throws UnknownCodeException{
 		List<String> translatedMessage = new ArrayList<String>();
-		String result = "";
 		boolean firstTime = true;
 		
 		while (pas.hasOtherOption()) {
@@ -54,7 +54,7 @@ public class BinaryToMorseTranslator implements TranslateService {
 				pas.change();
 			}
 		}
-		return result; 
+		throw new UnknownCodeException("El codigo ingresado no es traducible");
 	}
 
 	/**
