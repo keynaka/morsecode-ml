@@ -36,7 +36,7 @@ public class BinaryParser implements ParseService {
 	 * Elimina los ruidos del inicio y fin del mensaje
 	 */
 	private void cleanMessage() {
-		this.messageRequest.setValue(this.messageRequest.getValue().replace("0", " ").trim().replace(" ", "0"));
+		this.messageRequest.setValue(this.messageRequest.getText().replace("0", " ").trim().replace(" ", "0"));
 	}
 	
 	/**
@@ -45,7 +45,7 @@ public class BinaryParser implements ParseService {
 	 */
 	private List<String> separateElements() {
 		List<String> parsedMessage = new ArrayList<String>();
-		String msg = messageRequest.getValue();
+		String msg = messageRequest.getText();
 		
 		int i = 0;
 		char actualValue = msg.charAt(i);
