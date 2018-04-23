@@ -3,8 +3,10 @@ package ar.com.nnakasone.morsecode_ml.controller;
 import java.util.List;
 
 import ar.com.nnakasone.morsecode_ml.dto.MessageRequest;
-import ar.com.nnakasone.morsecode_ml.parseservice.*;
-import ar.com.nnakasone.morsecode_ml.translateservice.*;
+import ar.com.nnakasone.morsecode_ml.services.ParseService;
+import ar.com.nnakasone.morsecode_ml.services.TranslateService;
+import ar.com.nnakasone.morsecode_ml.services.parser.*;
+import ar.com.nnakasone.morsecode_ml.services.translator.*;
 
 /**
  * @author Nicolas Nakasone
