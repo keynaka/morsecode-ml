@@ -1,0 +1,17 @@
+#Compiled Files
+*.class
+
+#Files
+target
+.classpath*
+.mvn*
+.settings*
+.project*
+
+#Package Files
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
