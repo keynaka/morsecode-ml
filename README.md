@@ -74,10 +74,54 @@ $ curl -X POST "http://meli.com/translate/2morse" -d "{text: 'HOLA MELI'}"
 # Hipotesis
 1.	Se crearon las interfaces de servicio para parseo, traduccion y analisis de patron pensando que a futuro podrian agregarse nuevas implementaciones.
 
-2.	En caso de venir un character que no pertenezca a la tabla de traduccion entregada en el enunciado, el metodo entregara un String vacio y tambien una UnknownCodeException.
+2.	En caso de venir un character que no pertenezca a la tabla de traduccion entregada en el enunciado, el metodo lanzara una UnknownCodeException y respondera que "El codigo ingresado no es traducible".
 
 3. Se eligio la pausa prolongada para indicar el fin del mensaje.
 
 4. En translate2Morse, si el mensaje viene en minuscula se lo interpretara como mayuscula y realizara la traduccion.
 
 5. Se ha considerado una secuencia de bits como si fuera un String con valores binarios.
+
+# Links
+
+https://nnakasone-morsecode-ml.herokuapp.com/translate/2text
+
+**Formato de Input:**
+```
+{
+	"text": ".... --- .-.. .-  -- . .-.. .."
+}
+```
+
+**Formato de Output:**
+```
+{
+    "code": 200,
+    "response": "HOLA MELI"
+}
+```
+
+---
+
+https://nnakasone-morsecode-ml.herokuapp.com/translate/2morse
+
+**Formato de Input:**
+```
+{
+	"text": "HOLA MELI"
+}
+```
+
+**Formato de Output:**
+```
+{
+    "code": 200,
+    "response": ".... --- .-.. .-  -- . .-.. .."
+}
+```
+
+---
+
+#### Nota:
+
+La primera vez que se intente realizar la consulta podria demorar unos segundos hasta que se inicialize la aplicacion.
