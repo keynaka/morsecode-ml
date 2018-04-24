@@ -72,7 +72,7 @@ public class KMeans implements PatternAnalyzerService{
 		
 		while (it.hasNext()) {
 			Element element = it.next();
-			nearestCluster(element).add(element);
+			getNearestCluster(element).add(element);
 		}
 	}
 
@@ -81,7 +81,7 @@ public class KMeans implements PatternAnalyzerService{
 	 * @param element
 	 * @return
 	 */
-	private Cluster nearestCluster(Element element) {		
+	private Cluster getNearestCluster(Element element) {		
 		Iterator<Map.Entry<String,Cluster>> it = clusters.entrySet().iterator();
 		
 		Cluster minDistanceCluster = null;
