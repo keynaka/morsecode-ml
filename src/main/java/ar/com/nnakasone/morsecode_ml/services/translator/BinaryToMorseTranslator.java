@@ -19,7 +19,7 @@ public class BinaryToMorseTranslator implements TranslateService {
 	private List<String> parsedMessage;
 	
 	/**
-	 * Constructor
+	 * Constructor de BinaryToMorseTranslator
 	 */
 	public BinaryToMorseTranslator(List<String> parsedMessage) {
 		pas = new KMeans(parsedMessage);

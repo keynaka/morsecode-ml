@@ -14,7 +14,7 @@ public class MessageResponse {
 	private String response;
 	
 	/**
-	 * 
+	 * Constructor de MessageResponse
 	 */
 	public MessageResponse(int code, String response) {
 		this.code = code;

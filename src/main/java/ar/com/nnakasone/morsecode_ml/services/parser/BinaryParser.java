@@ -14,7 +14,7 @@ public class BinaryParser implements ParseService {
 	private MessageRequest messageRequest;
 
 	/**
-	 * Constructor
+	 * Constructor de BinaryParser
 	 * @param message
 	 */
 	public BinaryParser(MessageRequest message) {

@@ -15,7 +15,7 @@ public class Element {
 	private String value;
 
 	/**
-	 * Constructor de Clase
+	 * Constructor de Element
 	 */
 	public Element(String value) {
 		this.setPosition(value);

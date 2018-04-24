@@ -14,7 +14,7 @@ import ar.com.nnakasone.morsecode_ml.exception.UnknownCodeException;
 public class MorseToRomanTranslator extends RomanMorseTranslator {
 	
 	/**
-	 * Constructor
+	 * Constructor de MorseToRomanTranslator
 	 */
 	public MorseToRomanTranslator(List<String> parsedMessage) {
 		super(parsedMessage);

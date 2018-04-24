@@ -17,10 +17,8 @@ public class KMeans implements PatternAnalyzerService{
 	
 	private Queue<ChangeStrategy> options;
 	
-	private Map<String,String> clusterToMorse;
-	
 	/**
-	 * Construsctor de KMeans
+	 * Constructor de KMeans
 	 */
 	public KMeans(List<String> parsedMessage) {
 		initialize(parsedMessage);

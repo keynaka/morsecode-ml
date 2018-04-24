@@ -17,7 +17,7 @@ public class Cluster {
 	private String type;
 	
 	/**
-	 * Constructor de Clase Cluster
+	 * Constructor de Cluster
 	 */
 	public Cluster(Element centroid, String type) {
 		this.centroid = centroid;
@@ -65,7 +65,7 @@ public class Cluster {
 	}
 	
 	/**
-	 * Calcula la disntacio del centroide de este cluster a un cierto elemento
+	 * Calcula la distancia del centroide de este cluster a un cierto elemento
 	 * @param element
 	 * @return
 	 */

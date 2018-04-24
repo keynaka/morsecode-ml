@@ -18,7 +18,7 @@ public abstract class ChangeStrategy {
 	private boolean changed;
 	
 	/**
-	 * Constructor del ChangeStrategy
+	 * Constructor de ChangeStrategy
 	 */
 	public ChangeStrategy(KMeans kmeans) {
 		this.kmeans = kmeans;

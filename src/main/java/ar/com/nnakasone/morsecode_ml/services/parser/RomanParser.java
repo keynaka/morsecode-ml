@@ -15,11 +15,13 @@ public class RomanParser implements ParseService {
 
 	private MessageRequest messageRequest;
 	
-	public RomanParser() {
-	}
+	/**
+	 * Constructor vacio de RomanParser
+	 */
+	public RomanParser() {}
 
 	/**
-	 * Constructor de Clase RomanParser
+	 * Constructor de RomanParser
 	 * @param message
 	 */
 	public RomanParser(MessageRequest message) {
