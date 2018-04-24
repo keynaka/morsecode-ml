@@ -1,5 +1,6 @@
 package ar.com.nnakasone.morsecode_ml.logger;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.logging.*;
 
@@ -9,7 +10,9 @@ public class TranslationLogger {
 
 	public TranslationLogger() {
 		try {
-			FileHandler fileHandler = new FileHandler("logger.log", true);
+			File folder = new File("log"); 
+			folder.mkdir(); 
+			FileHandler fileHandler = new FileHandler("log/logger.log", true);
 			fileHandler.setFormatter(new SimpleFormatter());
 			LOGGER.addHandler(fileHandler);
 		} catch (SecurityException e) {

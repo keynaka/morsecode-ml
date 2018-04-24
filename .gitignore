@@ -10,7 +10,8 @@ target
 
 #Log Files
 log
-*.log
+*.log*
+
 
 #Package Files
 *.jar
