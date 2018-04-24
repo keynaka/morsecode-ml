@@ -3,7 +3,6 @@ package ar.com.nnakasone.morsecode_ml.services.translator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-
 import ar.com.nnakasone.morsecode_ml.exception.UnknownCodeException;
 
 /**
@@ -33,6 +32,7 @@ public class MorseToRomanTranslator extends RomanMorseTranslator {
 	
 	/**
 	 * Traduce mensaje de morse a romano
+	 * En caso de encontrar un codigo no existente en la tabla, lanzara una excepcion
 	 * @param parsedMessage
 	 */
 	public String translate() throws UnknownCodeException {

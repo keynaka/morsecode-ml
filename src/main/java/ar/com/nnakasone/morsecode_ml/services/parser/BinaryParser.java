@@ -1,7 +1,6 @@
 package ar.com.nnakasone.morsecode_ml.services.parser;
 
 import java.util.*;
-
 import ar.com.nnakasone.morsecode_ml.dto.MessageRequest;
 import ar.com.nnakasone.morsecode_ml.services.ParseService;
 
@@ -9,6 +8,7 @@ import ar.com.nnakasone.morsecode_ml.services.ParseService;
  * @author Nicolas Nakasone
  *
  */
+
 public class BinaryParser implements ParseService {
 
 	private MessageRequest messageRequest;

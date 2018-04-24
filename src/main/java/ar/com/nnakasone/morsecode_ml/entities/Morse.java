@@ -44,7 +44,7 @@ public class Morse implements Code {
 	}
 
 	/**
-	 * Devuelve si existe el valor dentro de los posibles en tabla de codigo Morse.
+	 * Devuelve si existe el valor dentro de la tabla de codigo Morse.
 	 * @return found
 	 */
 	@Override

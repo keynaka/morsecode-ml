@@ -17,7 +17,7 @@ public class MessageRequest {
 	}
 
 	/**
-	 * Constructor Vacio de Clase
+	 * Constructor Vacio de MessageRequest
 	 */
 	public MessageRequest() {
 	}
@@ -45,6 +45,4 @@ public class MessageRequest {
 	public int getLength() {
 			return this.text.length();
 	}
-
-	
 }

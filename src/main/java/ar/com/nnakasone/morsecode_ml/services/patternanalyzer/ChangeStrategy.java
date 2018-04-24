@@ -1,10 +1,10 @@
 package ar.com.nnakasone.morsecode_ml.services.patternanalyzer;
 
-
 /**
  * @author Nicolas Nakasone
  *
  */
+
 public abstract class ChangeStrategy {
 
 	protected KMeans kmeans;

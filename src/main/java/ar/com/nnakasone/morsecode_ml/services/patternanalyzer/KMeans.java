@@ -1,7 +1,6 @@
 package ar.com.nnakasone.morsecode_ml.services.patternanalyzer;
 
 import java.util.*;
-
 import ar.com.nnakasone.morsecode_ml.entities.Morse;
 import ar.com.nnakasone.morsecode_ml.services.PatternAnalyzerService;
 
@@ -9,6 +8,7 @@ import ar.com.nnakasone.morsecode_ml.services.PatternAnalyzerService;
  * @author Nicolas Nakasone
  *
  */
+
 public class KMeans implements PatternAnalyzerService{
 
 	private List<Element> elements;
@@ -60,7 +60,6 @@ public class KMeans implements PatternAnalyzerService{
 		
 		clusters.put(Morse.DOT, new Cluster(dotDashElements.stream().min(c).get(), Morse.DOT));
 		clusters.put(Morse.DASH, new Cluster(dotDashElements.stream().max(c).get(), Morse.DASH));
-		
 		clusters.put(Morse.INNER_SPACE, new Cluster(spaceElements.stream().min(c).get(),Morse.INNER_SPACE));
 		clusters.put(Morse.OUTER_SPACE, new Cluster(spaceElements.stream().max(c).get(), Morse.OUTER_SPACE));
 	}

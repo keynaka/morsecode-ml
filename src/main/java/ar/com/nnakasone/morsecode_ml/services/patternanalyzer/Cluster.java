@@ -1,13 +1,13 @@
 package ar.com.nnakasone.morsecode_ml.services.patternanalyzer;
 
 import java.util.*;
-
 import ar.com.nnakasone.morsecode_ml.entities.Morse;
 
 /**
  * @author Nicolas Nakasone
  *
  */
+
 public class Cluster {
 
 	private Element centroid;
@@ -37,18 +37,26 @@ public class Cluster {
 		this.type = type;
 	}
 
-	public void add(Element element) {
-		this.elements.add(element);
+	/**
+	 * Agrega al elemento al Cluster y recalcula el centroide
+	 * @param element
+	 */
+	public void add(Element newElement) {
+		this.elements.add(newElement);
 		recalculateCentroid();
 	}
 	
+	/**
+	 * Elimina al elemento seleccionado del Cluster y recalcula el centroide
+	 * @param selectedElement
+	 */
 	public void delete(Element selectedElement) {
 		this.elements.remove(selectedElement);
 		recalculateCentroid();
 	}
 	
 	/**
-	 * Recalcula la posicion del centroide dependiendo de los elementos que tiene el cluster y la cantidad.
+	 * Recalcula la posicion del centroide dependiendo de los elementos que tiene el Cluster y la cantidad.
 	 */
 	public void recalculateCentroid() {
 		float result = centroid.getPosition();
@@ -122,6 +130,10 @@ public class Cluster {
 		return false;
 	}
 	
+	/**
+	 * Devuelve si el Cluster se encuentra vacio
+	 * @return
+	 */
 	public boolean isEmpty() {
 		return elements.isEmpty();
 	}
