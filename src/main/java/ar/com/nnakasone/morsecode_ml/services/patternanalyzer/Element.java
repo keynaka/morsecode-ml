@@ -6,6 +6,7 @@ import java.util.Objects;
  * @author Nicolas Nakasone
  *
  */
+
 public class Element {
 
 	private Float position; 
@@ -21,7 +22,6 @@ public class Element {
 		this.setPosition(value);
 		this.setType(value);
 		this.setValue(value);
-		
 	}
 	
 	public Float getPosition() {
@@ -53,8 +53,8 @@ public class Element {
 	 * @param e
 	 * @return
 	 */
-	public float distance(Element e) {
-		return Math.abs(this.position - e.getPosition());
+	public float distance(Element element) {
+		return Math.abs(this.position - element.getPosition());
 	}
 	
 	/**

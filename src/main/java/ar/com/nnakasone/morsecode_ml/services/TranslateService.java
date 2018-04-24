@@ -1,7 +1,6 @@
 package ar.com.nnakasone.morsecode_ml.services;
 
 import org.springframework.stereotype.Service;
-
 import ar.com.nnakasone.morsecode_ml.exception.UnknownCodeException;
 
 /**
@@ -11,6 +10,8 @@ import ar.com.nnakasone.morsecode_ml.exception.UnknownCodeException;
 
 @Service
 public interface TranslateService {
+	
 	public String translate() throws UnknownCodeException;
+	
 }
  

@@ -3,7 +3,6 @@ package ar.com.nnakasone.morsecode_ml.services.translator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import ar.com.nnakasone.morsecode_ml.entities.*;
 import ar.com.nnakasone.morsecode_ml.entities.Morse;
 import ar.com.nnakasone.morsecode_ml.entities.Roman;

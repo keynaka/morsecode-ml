@@ -1,6 +1,3 @@
-/**
- * 
- */
 package ar.com.nnakasone.morsecode_ml.exception;
 
 /**

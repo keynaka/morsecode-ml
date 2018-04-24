@@ -49,7 +49,6 @@ public class RomanToMorseTranslator extends RomanMorseTranslator {
 				throw new UnknownCodeException("El codigo ingresado no es traducible");
 			}
 		}
-		
 		return translatedMessage.substring(0, translatedMessage.length()-1);
 	}
 }

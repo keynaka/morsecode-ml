@@ -1,7 +1,6 @@
 package ar.com.nnakasone.morsecode_ml.services.translator;
 
 import java.util.*;
-
 import ar.com.nnakasone.morsecode_ml.entities.*;
 import ar.com.nnakasone.morsecode_ml.exception.UnknownCodeException;
 import ar.com.nnakasone.morsecode_ml.services.PatternAnalyzerService;
@@ -12,6 +11,7 @@ import ar.com.nnakasone.morsecode_ml.services.patternanalyzer.KMeans;
  * @author Nicolas Nakasone
  *
  */
+
 public class BinaryToMorseTranslator implements TranslateService {
 
 	private PatternAnalyzerService pas;
@@ -28,7 +28,9 @@ public class BinaryToMorseTranslator implements TranslateService {
 
 	/**
 	 * Traduce un mensaje binario parseado a morse
+	 * En caso de encontrar un codigo no existente en la tabla, lanzara una excepcion
 	 * @return result
+	 * @throws UnknownCodeException
 	 */
 	@Override
 	public String translate() throws UnknownCodeException{
@@ -91,7 +93,6 @@ public class BinaryToMorseTranslator implements TranslateService {
 				aLetter = aLetter.concat(actual);				
 			}
 		}
-		
 		return response;
 	}
 }
