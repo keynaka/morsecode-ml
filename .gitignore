@@ -8,6 +8,10 @@ target
 .settings*
 .project*
 
+#Log Files
+log
+*.log
+
 #Package Files
 *.jar
 *.war

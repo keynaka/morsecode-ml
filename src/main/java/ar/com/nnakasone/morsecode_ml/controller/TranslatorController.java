@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import ar.com.nnakasone.morsecode_ml.dto.MessageRequest;
 import ar.com.nnakasone.morsecode_ml.dto.MessageResponse;
 import ar.com.nnakasone.morsecode_ml.exception.UnknownCodeException;
+import ar.com.nnakasone.morsecode_ml.logger.TranslationLogger;
 import ar.com.nnakasone.morsecode_ml.services.ParseService;
 import ar.com.nnakasone.morsecode_ml.services.TranslateService;
 import ar.com.nnakasone.morsecode_ml.services.parser.*;
@@ -28,10 +29,14 @@ public class TranslatorController {
 	
 	private ParseService parser;
 	
+	private TranslationLogger logger;
+	
 	/**
 	 * Constructor vacio de TranslatorController
 	 */
-	public TranslatorController() {}
+	public TranslatorController() {
+		logger = new TranslationLogger();
+	}
 
 	/**
 	 * Traduce un mensaje en binario a morse
@@ -88,8 +93,10 @@ public class TranslatorController {
 			return new MessageResponse(code, translatedMessage);			
 		} catch (UnknownCodeException uce) {
 			uce.printStackTrace();
+			logger.log(uce.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.log(e.toString());
 		}
 		return new MessageResponse(HttpServletResponse.SC_FORBIDDEN, "");
 	}
