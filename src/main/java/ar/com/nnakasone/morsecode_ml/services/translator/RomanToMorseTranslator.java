@@ -15,7 +15,7 @@ public class RomanToMorseTranslator extends RomanMorseTranslator {
 	private final String OTHER_LETTER_SEPARATOR = " ";
 	
 	/**
-	 * Constructor
+	 * Constructor de RomanToMorseTranslator
 	 */
 	public RomanToMorseTranslator(List<String> parsedMessage) {
 		super(parsedMessage);

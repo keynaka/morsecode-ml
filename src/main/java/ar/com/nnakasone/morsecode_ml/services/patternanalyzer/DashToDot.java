@@ -9,7 +9,7 @@ import ar.com.nnakasone.morsecode_ml.entities.Morse;
 public class DashToDot extends ChangeStrategy {
 
 	/**
-	 * Constructor de Clase
+	 * Constructor de DashToDot
 	 * @param kmeans
 	 */
 	public DashToDot(KMeans kmeans) {

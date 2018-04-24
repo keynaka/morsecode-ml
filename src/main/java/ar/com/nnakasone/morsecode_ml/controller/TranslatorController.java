@@ -29,7 +29,7 @@ public class TranslatorController {
 	private ParseService parser;
 	
 	/**
-	 * Constructor vacio de Clase
+	 * Constructor vacio de TranslatorController
 	 */
 	public TranslatorController() {}
 

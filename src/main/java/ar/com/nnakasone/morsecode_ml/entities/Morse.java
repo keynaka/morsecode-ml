@@ -23,6 +23,10 @@ public class Morse implements Code {
 	
 	private Map<String,String> morseNameValueRelation;
 	
+	
+	/**
+	 * Constructor de Morse
+	 */
 	public Morse() {
 		morseNameValueRelation = new HashMap<String,String>();
 		morseNameValueRelation.put(Morse.DOT, ".");
@@ -40,7 +44,7 @@ public class Morse implements Code {
 	}
 
 	/**
-	 * Devuelve si existe el valor ingresado dentro de los posibles en el codigo Morse.
+	 * Devuelve si existe el valor dentro de los posibles en tabla de codigo Morse.
 	 * @return found
 	 */
 	@Override

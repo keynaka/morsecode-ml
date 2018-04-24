@@ -25,7 +25,7 @@ public abstract class RomanMorseTranslator implements TranslateService {
 	protected List<String> parsedMessage;
 
 	/**
-	 * Constructor de Clase RomanMorseTranslator
+	 * Constructor de RomanMorseTranslator
 	 */
 	public RomanMorseTranslator(List<String> parsedMessage) {
 		roman = new Roman();

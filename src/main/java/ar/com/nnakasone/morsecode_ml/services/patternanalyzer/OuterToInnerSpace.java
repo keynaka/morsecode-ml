@@ -9,7 +9,7 @@ import ar.com.nnakasone.morsecode_ml.entities.Morse;
 public class OuterToInnerSpace extends ChangeStrategy {
 
 	/**
-	 * Constructor de Clase
+	 * Constructor de OuterToInnerSpace
 	 * @param kmeans
 	 */
 	public OuterToInnerSpace(KMeans kmeans) {
