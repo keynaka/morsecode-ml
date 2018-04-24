@@ -120,8 +120,8 @@ https://nnakasone-morsecode-ml.herokuapp.com/translate/2morse
 }
 ```
 
----
 
-#### Nota:
+# Notas
 
-La primera vez que se intente realizar la consulta podria demorar unos segundos hasta que se inicialize la aplicacion.
+* La primera vez que se intente realizar la consulta podria demorar unos segundos hasta que se inicialize la aplicacion.
+* En el repositorio se encuentra un Diagrama de Clases con el nombre de: "Class Diagram - MorseCode - ML.jpg"
