@@ -24,7 +24,7 @@ public class MorseToRomanTranslator extends RomanMorseTranslator {
 	 * @param map
 	 */
 	@Override
-	public void iniciateMap(Map<String, String> map) {
+	protected void iniciateMap(Map<String, String> map) {
 		for (int i=0 ; i<roman.getSize() ; i++) {
 			map.put(morse.getCode(i), roman.getCode(i));
 		}

@@ -36,5 +36,5 @@ public abstract class RomanMorseTranslator implements TranslateService {
 	
 	public abstract String translate() throws UnknownCodeException;
 	
-	public abstract void iniciateMap(Map<String,String> map);
+	protected abstract void iniciateMap(Map<String,String> map);
 }
