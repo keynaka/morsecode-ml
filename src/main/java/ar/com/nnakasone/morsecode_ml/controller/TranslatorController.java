@@ -94,10 +94,12 @@ public class TranslatorController {
 		} catch (UnknownCodeException uce) {
 			uce.printStackTrace();
 			logger.log(uce.toString());
+			return new MessageResponse(HttpServletResponse.SC_FORBIDDEN, uce.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 			logger.log(e.toString());
+			return new MessageResponse(HttpServletResponse.SC_FORBIDDEN, e.toString());
 		}
-		return new MessageResponse(HttpServletResponse.SC_FORBIDDEN, "");
+		
 	}
 }
